@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@view-transition{
+    navigation : auto;
+}
+.bg, .bg1, .bg2 {
+    will-change: transform; /* or opacity if you're fading */
+}
+html{
+    background: #000;
+    overflow: hidden;
+}
+canvas{
+    touch-action: pan-y !important;
+}

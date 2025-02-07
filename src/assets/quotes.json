@@ -1,0 +1,43 @@
+[
+    {
+      "tip": "Use Rubber Duck Debugging",
+      "description": "Explain your code line-by-line to an imaginary duck or any object nearby to uncover bugs. Works like magic!"
+    },
+    {
+      "tip": "Master Regex",
+      "description": "Learn regular expressions. They can simplify complex string manipulations into one elegant line of code."
+    },
+    {
+      "tip": "Think in Big O",
+      "description": "Always analyze your code's time and space complexity as you write it. Optimizing early saves headaches later."
+    },
+    {
+      "tip": "Embrace Pseudocode",
+      "description": "Before writing code, draft your logic in plain English or pseudocode. It's like a cheat sheet for coding."
+    },
+    {
+      "tip": "Debug with Print Statements",
+      "description": "Strategically place print statements to trace the flow of your program when debugging. It’s simple but effective."
+    },
+    {
+      "tip": "Use the 'Divide and Conquer' Approach",
+      "description": "Break problems into smaller sub-problems. Recursive thinking often leads to elegant solutions."
+    },
+    {
+      "tip": "Write Unit Tests",
+      "description": "Testing your functions with edge cases early can save hours of debugging. It’s like future-proofing your code."
+    },
+    {
+      "tip": "Learn a Shortcut a Day",
+      "description": "Master your IDE’s keyboard shortcuts. Every saved second adds up in the long run."
+    },
+    {
+      "tip": "Use Visual Debugging Tools",
+      "description": "Many IDEs offer powerful debugging tools with breakpoints and step execution. Take full advantage of them."
+    },
+    {
+      "tip": "Gamify Coding Challenges",
+      "description": "Turn DSA practice into a game. Compete with friends or set personal records to make it more engaging."
+    }
+  ]
+  
