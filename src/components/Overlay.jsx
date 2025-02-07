@@ -14,7 +14,7 @@ const Section = ({scrollDiv , setScrollDiv }) => {
             post1:"Presedent",
             Voice: "Ashish Nagmoti",
             post2:"Voice-President",
-            img1: "../src/assets/members/Ashish.png",
+            img1: "../src/assets/members/riddhi.jpeg",
             img2: "../src/assets/members/Ashish.png"
         },
         Secretaries: {
@@ -51,7 +51,7 @@ const Section = ({scrollDiv , setScrollDiv }) => {
             Voice: "Siddhi Brahmankar",
             post2:"Creative Co-Lead",
             img1: "../src/assets/members/Pratiksha Khandbahale.jpg",
-            img2: "../src/assets/members/Ashish.png",
+            img2: "../src/assets/members/siddhi.png",
             1: "Riaan Attar",
             2: "Bhavesh Sonawane",
             3: "Anushka Paithankar",
@@ -89,23 +89,23 @@ const Section = ({scrollDiv , setScrollDiv }) => {
             setTitle("Presidents")
         }
         else if(e == 4){
-            scrollTarget = (2 -1)* 400;
+            scrollTarget = (2 -1)* 580;
             setTitle("Secretaries")
         }
         else if(e == 7){
-            scrollTarget = (3.01 -1)* 400;
+            scrollTarget = (3.01 -1)* 580;
             setTitle("Treasurers")
         }
         else if(e == 3){
-            scrollTarget = (4 -1)* 405;
+            scrollTarget = (4 -1)* 590;
             setTitle("TechTeam")
         }
         else if(e == 6){
-            scrollTarget = (5 -1)* 405;
+            scrollTarget = (5 -1)* 590;
             setTitle("CreativeTeam")
         }
         else if(e == 5){
-            scrollTarget = (6 -1)* 405;
+            scrollTarget = (6 -1)* 590;
             setTitle("ManagementTeam")
         }
         
@@ -132,7 +132,7 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(6)}>CreativeTeam</button>
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(5)}>ManagementTeam</button>
                     </div>
-                        <div ref={containerRef} className='h-full w-full backdrop-blur-md bg-backG/35 flex overflow-hidden items-center gap-5 border-2 border-[#fff] rounded-lg '>
+                        <div ref={containerRef} className='h-fit w-full backdrop-blur-md bg-backG/35 flex overflow-hidden items-center gap-5 border-2 border-[#fff] rounded-lg '>
                             {Object.entries(data).map(([teamName, teamData], index) => (
                                 <section id={teamName} className='w-full h-full transition-all flex flex-col justify-start gap-5  p-5 items-center flex-shrink-0' key={index}>
                                     <section className='w-full flex flex-col gap-10 justify-center items-center'>
@@ -141,14 +141,14 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                                         <div className='w-full flex items-center justify-center gap-8'>
                                             {teamData.post1 && (
                                                 <div className='flex flex-col gap-2 justify-center items-center'>
-                                                    <img src={teamData.img1} alt={`${teamData.post1}`} className='w-32 h-32 rounded-full object-cover m-2 border-4' />
+                                                    <img src={teamData.img1} alt={`${teamData.post1}`} className='w-44 h-44 rounded-full object-cover m-2 border-4' />
                                                     <h2 className='text-lg font-bold'>{teamData.post1}</h2>
                                                     <h2 className='text-sm'>{teamData.Leader}</h2>
                                                 </div>
                                             )}
                                             {teamData.post2 && (
                                                 <div className='flex flex-col gap-2 justify-center items-center'>
-                                                    <img src={teamData.img2} alt={`${teamData.post2}`} className='w-32 h-32 rounded-full object-cover m-2 border-4' />
+                                                    <img src={teamData.img2} alt={`${teamData.post2}`} className='w-44 h-44 rounded-full object-cover m-2 border-4' />
                                                     <h2 className='text-ld font-bold'>{teamData.post2}</h2>
                                                     <h2 className='text-sm'>{teamData.Voice}</h2>
                                                 </div>
@@ -157,13 +157,13 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                                     )}
 
                                         {teamData[1] && (
-                                            <div className={teamName !== "ManagementTeam" ? '-mt-5':"mt-0" }>
+                                            <div className={teamName !== "ManagementTeam" ? '-mt-5':"mt-0 w-fit flex flex-col gap-5" }>
                                                 <h3 className='text-md font-semibold text-center'>Members</h3>
                                                 <ul className='list-disc list-inside w-full items-center justify-center'>
                                                     {Object.keys(teamData)
                                                         .filter(key => !isNaN(parseInt(key))) // Filter keys that are numbers
                                                         .map(key => (
-                                                            <li className={teamName !== "ManagementTeam" ? 'text-[12px] p-[2px]':'text-[15px] p-1' } key={key}>{teamData[key]}</li>
+                                                            <li className={teamName !== "ManagementTeam" ? 'text-[17px] p-[2px]':'text-[25px] p-1' } key={key}>{teamData[key]}</li>
                                                         ))}
                                                 </ul>
                                             </div>
@@ -173,15 +173,19 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                             ))}
                         </div>
                     </div>
-            <AnimatePresence>
+            <AnimatePresence mode='wait'>
                     <motion.span 
-                    initial={{ x:0 }}
-                    animate={{ x:0 }}
-                    exit={{ x:"100%" }}
-                    className='text-6xl text-[#fff] p-28 overflow-hidden flex text-start font-bold'>
+                    key={title} // Unique identifier for animation triggers
+                    initial={{ y: 100, opacity: 0 }} // Start below viewport
+                    animate={{ y: 0, opacity: 1 }} // Slide up to normal position
+                    exit={{ y: -100, opacity: 0 }} // Slide up out of view
+                    transition={{ type:'tween', stiffness: 100 }}
+                    className='text-6xl font-pixelSans text-[#fff] p-28 overflow-hidden flex text-start font-bold'>
                         <h1 className='p-5 border-b-4'> {title} </h1>
                     </motion.span>
+                    
             </AnimatePresence>
+            
             </section>
         </>
     );

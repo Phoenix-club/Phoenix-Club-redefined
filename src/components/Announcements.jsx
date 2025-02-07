@@ -9,7 +9,8 @@ const Announcements = ({ loading, setLoading }) => {
 
   const events = [
     { event: "Code-Relay", desc: "Code relay is competition which combines DSA coding compatibility with Teamwork to achieve absolute sofware coding skills", image: "../src/assets/events/1.jpeg", active: true },
-    { event: "Prompt Quest", desc: "Explore your prompting skills using Prompt Quest and boost your creativity while competing", image: "../src/assets/events/3.jpeg", active: false },
+    { event: "Prompt Quest", desc: "Explore your prompting skills using Prompt Quest and boost your creativity while competing", image: "../src/assets/events/prompt.JPG", active: false },
+    { event: "Pixel Perfect", desc: "Show your colors of imagination through Figma prototypes and aquire the skill of UI and UX design by participating in Pixel Perfect", image: "../src/assets/events/Pixel.JPG", active: false },
   ]
 
   const [event, setEvent] = useState(events[0])
