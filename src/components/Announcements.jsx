@@ -79,7 +79,7 @@ const Announcements = ({ loading, setLoading }) => {
       <h1 className='text-[#FDE37D] absolute right-10 top-12 text-7xl font-pixelSans scale-y-150 font-extrabold z-[5] transition-all duration-1000'>Announcements</h1>
 
       {/* Dashboard */}
-      <section className='w-full h-full flex flex-col justify-between items-center p-10 py-24'>
+      <section className='w-full h-full flex flex-col justify-between items-center p-7'>
         <section className='w-full h-fit flex flex-col overflow-hidden  z-[10]'>
           <div className='w-96 h-fit gap-10 p-5 border-l-4 border-t-4 border-[#fff] font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff] transition-all'>
             <h1 className='text-5xl'>{event.event}</h1>
@@ -88,11 +88,11 @@ const Announcements = ({ loading, setLoading }) => {
           </div>
         </section>
         <section className='flex items-end justify-end h-1/2 w-1/3  z-[5]'>
-          <img className='h-full w-fit object-cover p-5 border-r-4 border-b-4 border-[#fff]' src={event.image} alt="" />
+          <img className='h-full w-full object-cover p-5 border-r-4 border-b-4 border-[#fff]' src={event.image} alt="" />
         </section>
       </section>
       {/* Dashboard Titles  */}
-      <section className='w-[35rem] h-fit p-10 absolute pt-32 gap-5  z-10 font-pixelSans right-4 top- text-4xl text-[#fff]'>
+      <section className='w-[35rem] h-fit p-10 absolute pt-32 gap-5  z-10 font-pixelSans right-4 top-10 text-4xl text-[#fff]'>
         <h1 className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'>Code-Relay</h1>
         <h1 className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'>Prompt Quest</h1>
         <h1 className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'>Pixel Perfect</h1>

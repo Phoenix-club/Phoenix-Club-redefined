@@ -12,6 +12,7 @@ html{
     background: #000;
     overflow: hidden;
 }
-canvas{
+text{
     touch-action: pan-y !important;
+    overflow: hidden;
 }

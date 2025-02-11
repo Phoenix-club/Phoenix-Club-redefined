@@ -19,8 +19,11 @@ const Members = () => {
     <motion.div className='w-screen h-screen'>
       <Canvas
       camera={{
-        fov:90,
-        position: [0, 2, 1]
+        fov:60,
+        position: [0, 1, 1]
+      }}
+      style={{
+        background:"#111111"
       }}
       shadows
       >

@@ -12,171 +12,106 @@ gsap.registerPlugin(ScrollToPlugin);
 
 const Experience = () => {
 
-  const textRef = useRef();
   const lightRef = useRef();
-  const [textContent, setTextContent] = useState(" ")
-  const tl = useRef();
-  const scroll = useScroll();
+  const textRef = useRef();
+  const [textContent, setTextContent] = useState('')
   const { camera } = useThree();
   const [ scrollDiv, setScrollDiv ] = useState(0)
 
-  useFrame(() => {
-    if(tl.current){
-      const targetY = scrollDiv * 20;
-      const currentY = tl.current.time();
-      const smoothY = MathUtils.lerp(currentY,targetY,0.1)
-      tl.current.seek(smoothY)
+  const textPosition = useRef({ x: 0, y: 0, z: -1 })
+  const textRotation = useRef({ x: 0, y: 0, z: 0 })
+
+  useEffect(() => {
+    if (!textRef.current) return
+
+    let newPosition = { x: 0, y: 0, z: -1 }
+    let newRotation = { x: 0, y: 0, z: 0 }
+
+    switch (textContent) {
+      case 'Presidents':
+        newPosition.y = 0.2
+        newPosition.x = -0.5
+        break
+      case 'Secretaries':
+        newPosition = {x: -0.3, y: 0.2, z: -0.5}
+        break
+      case 'Treasurers':
+        newPosition = { x: -0.56, y: -0.2, z: -0.6}
+        break
+      case 'CreativeTeam':
+        newPosition = { x: -0.7, y: 0.2, z: -0.24 }
+        newRotation.y = 0.3
+        break
+      case 'ManagementTeam':
+        newPosition = { x: -1, y: .2, z: 0 }
+        break
+      case 'TechTeam':
+        newPosition = { x: -1, y: -0.2, z: 0.1 }
+        newRotation.y = 1.5
+        break
     }
-});
 
+    // Animate position smoothly
+    gsap.to(textPosition.current, {
+      ...newPosition,
+      duration: 3,
+      ease: 'power2.out',
+    })
 
-  !isMobile && useEffect(()=>{
-    //position manipuulation
-    tl.current = gsap.timeline({
-      onUpdate: () =>{
-        if (scrollDiv === 1){
-            setTextContent("Presidents")
-        }
-        else if (scrollDiv === 3){
-            setTextContent("Tech Team")
- 
-        }
-        else if (scrollDiv === 4){
-            setTextContent("Secretaries")
-        }
-        else if (scrollDiv === 7){
-            setTextContent("Treasurers")
-        }
-        else if (scrollDiv === 5){
-            setTextContent("ManagementTeam")
-        }
-        else if (scrollDiv === 6){
-            setTextContent("CreativeTeam")
-        }
-        else{
-            setTextContent("")
-        }
-      }
-    });
-    
-    tl.current.to(
-      textRef.current.rotation ,
-      {
-        duration :20,
-        x:-Math.PI / 2,
-        ease:"power1.inOut",
-      },
-      "fov"
-    ).to(
-      textRef.current.position ,
-      {
-        duration :20,
-        x:0.5,
-        z: 0,
-        ease:"power1.inOut",
-      },
-      "fov"
-    ).to(
-      textRef.current.rotation ,
-      {
-        duration:20,
-        z: 0,
-      },
-      "cafeteria"
+    // Animate rotation smoothly
+    gsap.to(textRotation.current, {
+      ...newRotation,
+      duration: 3,
+      ease: 'power2.out',
+    })
+  }, [textContent])
 
-    ).to(
-      textRef.current.rotation ,
-      {
-        duration:20,
-        z: -Math.PI * 0.5,
-      },
-      "engine"
-
-    ).to(
-      textRef.current.rotation ,
-      {
-        duration:20,
-        z: Math.PI / 62,
-      },
-      "storage"
-
-    ).to(
-      textRef.current.rotation ,
-      {
-        duration:20,
-        z: -Math.PI / 2,
-      },
-      "comms"
-
-    ).to(
-      textRef.current.position ,
-      {
-        duration:20,
-        z: -0.5,
-      },
-      "comms"
-
-    ).to(
-      textRef.current.rotation ,
-      {
-        duration:20,
-
-      },
-      "navigation"
-
-    ).to(
-      textRef.current.rotation ,
-      {
-        duration:20,
-        z: Math.PI / 3,
-      },
-      "Weap"
-    )
-    .to(
-      textRef.current.position ,
-      {
-        duration:20,
-        z: 0.5,
-      },
-      "Weap"
-    )
-    return () =>{ tl.current.kill(); }
-
-  },[])
-
-
+  // Apply animation on each frame
+  useFrame(() => {
+    if (textRef.current) {
+      textRef.current.position.set(
+        textPosition.current.x,
+        textPosition.current.y,
+        textPosition.current.z
+      )
+      textRef.current.rotation.set(
+        textRotation.current.x,
+        textRotation.current.y,
+        textRotation.current.z
+      )
+    }
+  })
 
   return (<>
     {/* Lightings */}
     {/* <ambientLight intensity={0.2}/> */}
     <spotLight
         ref={lightRef}
-        position={[0, 2, -1]}  // Light coming from one side
-        intensity={1}          // Adjust brightness
+        position={[0, 3, 2]}  // Light coming from one side
+        intensity={80}          // Adjust brightness
         castShadow
-        distance={100}
-        angle={Math.PI/5}
+        distance={80}
+        angle={Math.PI/9}
         power={50}    
         penumbra={1}
       />
-    {/* <OrbitControls enableRotate={false} enableZoom={false} /> */}
+    <OrbitControls enableRotate={false} enableZoom={false} />
     {/* text behind the model */}
-    {!isMobile && <Text
+    <Text
         ref={textRef}
-        position={[-1, 0.5, 0]}
-        fontSize={0.1}
+        key={textContent}
+        position={[0, 0, -1]}
+        fontSize={0.15}
         color="white"
         anchorX="left"
         anchorY="middle"
-
-        // material={{ transparent:0, opacity:0 }}
         className='h-screen flex flex-col justify-center'
         >
           {textContent}
-        </Text>}
+        </Text>
         {/* Model */}
       <Model textContent={textContent} setTextContent={setTextContent} scrollDiv={scrollDiv} setScrollDiv={setScrollDiv} />
-    <Overlay scrollDiv={scrollDiv} setScrollDiv={setScrollDiv}  />
+    <Overlay scrollDiv={scrollDiv} setScrollDiv={setScrollDiv} textContent={textContent} setTextContent={setTextContent} />
   </>
   )
 }   

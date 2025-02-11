@@ -6,19 +6,19 @@ import React, { useEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollToPlugin)
 
-const Section = ({scrollDiv , setScrollDiv }) => {
+const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
     const [title, setTitle] = useState('');
     const data = {
         Presidents: {
             Leader: "Riddhi Singvi",
-            post1:"Presedent",
+            post1:"President",
             Voice: "Ashish Nagmoti",
             post2:"Voice-President",
             img1: "../src/assets/members/riddhi.jpeg",
             img2: "../src/assets/members/Ashish.png"
         },
         Secretaries: {
-            Leader: "Vidhi Patwa",
+            Leader: "Vidhee Patwa",
             post1:"Secretary",
             Voice: "Aryan Suryawanshi",
             post2:"Joint-Secretary",
@@ -83,37 +83,44 @@ const Section = ({scrollDiv , setScrollDiv }) => {
 
     const handleClick = (e) =>{
         setScrollDiv(parseInt(e));
+
         let scrollTarget = 0
         if(e == 1){
             scrollTarget = 0;
             setTitle("Presidents")
+            setTextContent("Presidents")
         }
         else if(e == 4){
-            scrollTarget = (2 -1)* 580;
+            scrollTarget = (2 -1)* 900;
             setTitle("Secretaries")
+            setTextContent("Secretaries")
         }
         else if(e == 7){
-            scrollTarget = (3.01 -1)* 580;
+            scrollTarget = (3.01 -1)* 900;
             setTitle("Treasurers")
+            setTextContent("Treasurers")
         }
         else if(e == 3){
-            scrollTarget = (4 -1)* 590;
+            scrollTarget = (4 -1)* 900;
             setTitle("TechTeam")
+            setTextContent("TechTeam")
         }
         else if(e == 6){
-            scrollTarget = (5 -1)* 590;
+            scrollTarget = (5 -1)* 900;
             setTitle("CreativeTeam")
+            setTextContent("CreativeTeam")
         }
         else if(e == 5){
-            scrollTarget = (6 -1)* 590;
+            scrollTarget = (6 -1)* 900;
             setTitle("ManagementTeam")
+            setTextContent("ManagementTeam")
         }
         
         gsap.to(containerRef.current,{
             duration:1,
             scrollTo:{
                 target:containerRef,
-                x:scrollTarget
+                y:scrollTarget
             },
             ease:"power1.inOut"
         })
@@ -123,7 +130,7 @@ const Section = ({scrollDiv , setScrollDiv }) => {
     return (
         <>
             <section className='h-screen w-screen flex justify-between items-start p-5 pr-10 '>
-                <div className='h-[95vh] w-[30vw] gap-6 flex flex-col justify-start items-start text-[#fff]'>
+                <div className='h-[95vh] w-full gap-6 flex justify-between items-start text-[#fff]'>
                     <div className='flex flex-col w-full h-1/3 items-start justify-between z-10 px-10 '>
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(1)}>Presidents</button>
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(4)}>Secretaries</button>
@@ -132,7 +139,7 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(6)}>CreativeTeam</button>
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(5)}>ManagementTeam</button>
                     </div>
-                        <div ref={containerRef} className='h-fit w-full backdrop-blur-md bg-backG/35 flex overflow-hidden items-center gap-5 border-2 border-[#fff] rounded-lg '>
+                        <div ref={containerRef} className='h-full bg-backG w-[45vw]  flex flex-col overflow-hidden items-center gap-5 '>
                             {Object.entries(data).map(([teamName, teamData], index) => (
                                 <section id={teamName} className='w-full h-full transition-all flex flex-col justify-start gap-5  p-5 items-center flex-shrink-0' key={index}>
                                     <section className='w-full flex flex-col gap-10 justify-center items-center'>
@@ -141,16 +148,20 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                                         <div className='w-full flex items-center justify-center gap-8'>
                                             {teamData.post1 && (
                                                 <div className='flex flex-col gap-2 justify-center items-center'>
-                                                    <img src={teamData.img1} alt={`${teamData.post1}`} className='w-44 h-44 rounded-full object-cover m-2 border-4' />
-                                                    <h2 className='text-lg font-bold'>{teamData.post1}</h2>
-                                                    <h2 className='text-sm'>{teamData.Leader}</h2>
+                                                    <img src={teamData.img1} alt={`${teamData.post1}`} className='w-44 h-44 rounded-full object-cover m-2 object-top border-4' />
+                                                    <div className='backdrop-blur-lg  bg-backG/10 px-5 py-2  border-2 border-[#fff] rounded-full '>
+                                                        <h2 className='text-lg font-bold'>{teamData.post1}</h2>
+                                                        <h2 className='text-sm'>{teamData.Leader}</h2>
+                                                    </div>
                                                 </div>
                                             )}
                                             {teamData.post2 && (
                                                 <div className='flex flex-col gap-2 justify-center items-center'>
-                                                    <img src={teamData.img2} alt={`${teamData.post2}`} className='w-44 h-44 rounded-full object-cover m-2 border-4' />
-                                                    <h2 className='text-ld font-bold'>{teamData.post2}</h2>
-                                                    <h2 className='text-sm'>{teamData.Voice}</h2>
+                                                    <img src={teamData.img2} alt={`${teamData.post2}`} className='w-44 object-top h-44 rounded-full object-cover m-2 border-4'  />
+                                                    <div className='backdrop-blur-lg px-5 py-2  bg-backG/10 border-2 border-[#fff] rounded-full '>
+                                                        <h2 className='text-ld font-bold'>{teamData.post2}</h2>
+                                                        <h2 className='text-sm'>{teamData.Voice}</h2>
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
@@ -173,29 +184,16 @@ const Section = ({scrollDiv , setScrollDiv }) => {
                             ))}
                         </div>
                     </div>
-            <AnimatePresence mode='wait'>
-                    <motion.span 
-                    key={title} // Unique identifier for animation triggers
-                    initial={{ y: 100, opacity: 0 }} // Start below viewport
-                    animate={{ y: 0, opacity: 1 }} // Slide up to normal position
-                    exit={{ y: -100, opacity: 0 }} // Slide up out of view
-                    transition={{ type:'tween', stiffness: 100 }}
-                    className='text-6xl font-pixelSans text-[#fff] p-28 overflow-hidden flex text-start font-bold'>
-                        <h1 className='p-5 border-b-4'> {title} </h1>
-                    </motion.span>
-                    
-            </AnimatePresence>
-            
             </section>
         </>
     );
 };
 
 
-const Overlay = ({setScrollDiv, scrollDiv}) => {
+const Overlay = ({setScrollDiv, scrollDiv,textContent, setTextContent}) => {
     return (
         <Scroll html>
-            <Section setScrollDiv={setScrollDiv} scrollDiv={scrollDiv} />
+            <Section setScrollDiv={setScrollDiv} scrollDiv={scrollDiv} textContent={textContent} setTextContent={setTextContent} />
         </Scroll>
     )
 }

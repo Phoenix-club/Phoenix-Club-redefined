@@ -25,215 +25,70 @@ const Model = ({textContent, setTextContent, scrollDiv, setScrollDiv , props }) 
   const scroll = useScroll();
   const { camera } = useThree();
 
-  // useFrame(() => {
-  //   // ref.current = gsap.utils.interpolate(
-  //   //   ref.current,
-  //   //   scrollDiv,
-  //   //   0.1 // Smoothing factor (0.1 = very smooth)
-  //   // );
-    
-  //   // tl.current.time(ref.current * tl.current.duration());
-  //     if(tl.current){
-  //       const targetY = scrollDiv * 20;
-  //       tl.current.seek(targetY)
-  //     }
-  //     // const scrollProgress = scroll.offset;
-  //     // tl.current.time(tl.current.duration() * scrollProgress * (scrollDiv * 1000));
-  // });
+  const ObjPosition = useRef({ x: -6, y: -0.4, z: 3.6 })
+  const ObjRotation = useRef({ x: 0, y: 0, z: 0 })
 
-  useFrame(() => {
-    if(tl.current){
-      const targetY = scrollDiv * 20;
-      const currentY = tl.current.time();
-      const smoothY = MathUtils.lerp(currentY,targetY,0.015)
-      tl.current.seek(smoothY)
-      
+  useEffect(() => {
+    if (!ref.current) return;
+  
+    let newPosition = { x: -6, y: -0.4, z: 3.6 };
+    let newRotation = { x: 0, y: 0, z: 0 };
+  
+    switch (textContent) {
+      case 'Presidents':
+        newPosition = { x: -5.7, y: 0, z: 4.6 };
+        break;
+      case 'Secretaries':
+        newPosition = { x: 1.5, y: 0, z: 6.9 };
+        newRotation.y = Math.PI / 2;
+        break;
+      case 'Treasurers':
+        newPosition = { x: 5.5, y: -0.5, z: -1.6 };
+        newRotation.y = Math.PI /1;
+        break;
+      case 'CreativeTeam':
+        newPosition = { x: -0.1, y: 0, z: 9 };
+        newRotation.y = Math.PI / 3;
+        break;
+      case 'ManagementTeam':
+        newPosition = { x: -6.9 , y: 0, z: 1.5 };
+        break;
+      case 'TechTeam':
+        newPosition = { x: -3, y: -0.5, z: -2 };
+        newRotation.y = -Math.PI * 0.5;
+        break;
     }
-});
-
-
-   useGSAP(()=>{
-    tl.current = gsap.timeline({
-      // onUpdate: () =>{
-      //   if (scrollDiv === 1){
-      //       setTextContent("Presidents")
-      //   }
-      //   else if (scrollDiv === 3){
-      //       setTextContent("Tech Team")
- 
-      //   }
-      //   else if (scrollDiv === 4){
-      //       setTextContent("Secretaries")
-      //   }
-      //   else if (scrollDiv === 7){
-      //       setTextContent("Treasurers")
-      //   }
-      //   else if (scrollDiv === 5){
-      //       setTextContent("ManagementTeam")
-      //   }
-      //   else if (scrollDiv === 6){
-      //       setTextContent("CreativeTeam")
-      //   }
-      //   else{
-      //       setTextContent("")
-      //   }
-      // }
+  
+    gsap.to(ObjPosition.current, {
+      ...newPosition,
+      duration: 2,
+      ease: 'power1.inOut',
     });
-    //position manipuulation
-    // Animation
-    tl.current
-    .to(
-      [ref.current.position] ,
-      {
-        duration :20,
-        ease:"power1.inOut",
-        x:-5.75,
-      },
-      "fov"
-    ).to(
-      [ref.current.position] ,
-      {
-        duration:20,
-        ease:"power1.inOut",
-        z: 3.6,
-        y:-0.5
-      },
-      "fov"
-    )
-    .to(
-      // Presidents
-      camera,
-      {
-        duration:20,
-        ease:"power1.inOut",
-        fov:(isMobile ? 70 : 60 ),
-        onUpdate: () => camera.updateProjectionMatrix(),
-      },
-      "Presidents"
-    ).to(
-      // Presidents
-      camera.position,
-      {
-        duration:20,
-        ease:"power1.inOut",
-        y:1.5,
-        onUpdate: () => camera.updateProjectionMatrix(),
-      },
-      "Presidents"
-    ).to(
-      // TechTeam Room
-      [ref.current.position] ,
-      {
-        duration:20,
-        ease:"power1.inOut",
-        x: -3,
-        z: -1.5,
-        y: -0.5,
-      },
-      "TechTeam"
-    )
-    .to(
-      // TechTeam Room
-      [ref.current.rotation] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        y: -Math.PI * 0.5,
-      },
-      "TechTeam"
-    )
-    .to(
-      // Treasurers
-      [ref.current.position] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        x: -5.5,
-        z: 1.55,
-        y: 0.2,
-      },
-      "Treasurers"
-    ).to(
-      //  Treasurers
-      [ref.current.rotation] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        y: Math.PI / 62,
-      },
-      "Treasurers"
-    ).to(
-      // Secretaries
-      [ref.current.position] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        x: 1.5,
-        z: 6.9,
-        y: 0,
-      },
-      "Secretaries"
-    ).to(
-      // Secretaries
-      [ref.current.rotation] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        y: Math.PI / 2,
-        // x: -MAP_X / (MEMBERS + 500),
-      },
-      "Secretaries"
-    ).to(
-      // ManagementTeam
-      [ref.current.position] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        x: 3.15,
-        z: 9.5,
-      },
-      "ManagementTeam"
-    ).to(
-      // CreativeTeamons
-      [ref.current.position] ,
-      {
-        duration:20,
-        // scrub:2,
-        ease:"power1.inOut",
-        x: -0.1,
-        z: 9,
-      },
-      "CreativeTeam"
-    ).to(
-      // CreativeTeamons
-      [ref.current.rotation] ,{
-        duration:20,
-        ease:"power1.inOut",
-        y: Math.PI / 3,  
-      },
-       "CreativeTeam"
-    )
-
-
-    return ()=> {tl.current.kill()}
-    
-  },[])
+  
+    gsap.to(ObjRotation.current, {
+      ...newRotation,
+      duration: 2,
+      ease: 'power1.inOut',
+    });
+  }, [textContent]);
+  
+  useFrame(() => {
+    if (ref.current) {
+      ref.current.position.set(
+        ObjPosition.current.x,
+        ObjPosition.current.y,
+        ObjPosition.current.z
+      )
+      ref.current.rotation.set(
+        ObjRotation.current.x,
+        ObjRotation.current.y,
+        ObjRotation.current.z
+      )
+    }
+  })
+  
 
   // Using useEffect to update State when browser paints screen unlike useLayoutEffect which changes states when all dom content is loaded
-  // useEffect(()=>[
-  //   const say = () =>{
-  //     console.log("From Map "+ scrollDiv)
-  //   }
-    
-
-  // ],[scrollDiv]);
-
 
   return (
     <>
