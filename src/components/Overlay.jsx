@@ -14,7 +14,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             post1:"President",
             Voice: "Ashish Nagmoti",
             post2:"Voice-President",
-            img1: "../src/assets/members/riddhi.jpeg",
+            img1: "../src/assets/members/Riddhi.png",
             img2: "../src/assets/members/Ashish.png"
         },
         Secretaries: {
@@ -22,8 +22,8 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             post1:"Secretary",
             Voice: "Aryan Suryawanshi",
             post2:"Joint-Secretary",
-            img1: "../src/assets/members/Vidhee patwa.jpg",
-            img2: "../src/assets/members/Aryan Suryavanshi.jpg"
+            img1: "../src/assets/members/VIDHEE.png",
+            img2: "../src/assets/members/ARYAN.png"
         },
         Treasurers: {
             Leader: "Uday Shah",
@@ -31,15 +31,15 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             Voice: "Atharva Jadhav",
             post2:"Co-Treasurer",
             img1: "../src/assets/members/Uday.png",
-            img2: "../src/assets/members/Atharva Jadhav.jpg"
+            img2: "../src/assets/members/ATHARVA.png"
         },
         TechTeam: {
             Leader: "Lulwa Anif",
             post1:"Tech Lead",
             Voice: "Om Patil",
             post2:"Tech Co-Lead",
-            img1: "../src/assets/members/Lulwa Anif.jpg",
-            img2: "../src/assets/members/Om.jpeg",
+            img1: "../src/assets/members/LULWA.png",
+            img2: "../src/assets/members/OREWA.png",
             1: "Pranjal Tile",
             2: "Mayur Jirapure",
             3: "Om Jadhav",
@@ -50,8 +50,8 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             post1:"Creative Lead",
             Voice: "Siddhi Brahmankar",
             post2:"Creative Co-Lead",
-            img1: "../src/assets/members/Pratiksha Khandbahale.jpg",
-            img2: "../src/assets/members/siddhi.png",
+            img1: "../src/assets/members/PRATIK.png",
+            img2: "../src/assets/members/SIDDHI.png",
             1: "Riaan Attar",
             2: "Bhavesh Sonawane",
             3: "Anushka Paithankar",
@@ -73,14 +73,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             9: "Krushna Malwatkar"
         }
     };
-
-    const containerRef = useRef();
-    useEffect(()=>{
-        console.log("From Overlay " + scrollDiv)
-    },[scrollDiv])
-
     
-
     const handleClick = (e) =>{
         setScrollDiv(parseInt(e));
 
@@ -115,15 +108,6 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             setTitle("ManagementTeam")
             setTextContent("ManagementTeam")
         }
-        
-        gsap.to(containerRef.current,{
-            duration:1,
-            scrollTo:{
-                target:containerRef,
-                y:scrollTarget
-            },
-            ease:"power1.inOut"
-        })
     }
 
 
@@ -139,51 +123,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(6)}>CreativeTeam</button>
                         <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(5)}>ManagementTeam</button>
                     </div>
-                        <div ref={containerRef} className='h-full bg-backG w-[45vw]  flex flex-col overflow-hidden items-center gap-5 '>
-                            {Object.entries(data).map(([teamName, teamData], index) => (
-                                <section id={teamName} className='w-full h-full transition-all flex flex-col justify-start gap-5  p-5 items-center flex-shrink-0' key={index}>
-                                    <section className='w-full flex flex-col gap-10 justify-center items-center'>
-
-                                    {teamName !== "ManagementTeam" && (
-                                        <div className='w-full flex items-center justify-center gap-8'>
-                                            {teamData.post1 && (
-                                                <div className='flex flex-col gap-2 justify-center items-center'>
-                                                    <img src={teamData.img1} alt={`${teamData.post1}`} className='w-44 h-44 rounded-full object-cover m-2 object-top border-4' />
-                                                    <div className='backdrop-blur-lg  bg-backG/10 px-5 py-2  border-2 border-[#fff] rounded-full '>
-                                                        <h2 className='text-lg font-bold'>{teamData.post1}</h2>
-                                                        <h2 className='text-sm'>{teamData.Leader}</h2>
-                                                    </div>
-                                                </div>
-                                            )}
-                                            {teamData.post2 && (
-                                                <div className='flex flex-col gap-2 justify-center items-center'>
-                                                    <img src={teamData.img2} alt={`${teamData.post2}`} className='w-44 object-top h-44 rounded-full object-cover m-2 border-4'  />
-                                                    <div className='backdrop-blur-lg px-5 py-2  bg-backG/10 border-2 border-[#fff] rounded-full '>
-                                                        <h2 className='text-ld font-bold'>{teamData.post2}</h2>
-                                                        <h2 className='text-sm'>{teamData.Voice}</h2>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-
-                                        {teamData[1] && (
-                                            <div className={teamName !== "ManagementTeam" ? '-mt-5':"mt-0 w-fit flex flex-col gap-5" }>
-                                                <h3 className='text-md font-semibold text-center'>Members</h3>
-                                                <ul className='list-disc list-inside w-full items-center justify-center'>
-                                                    {Object.keys(teamData)
-                                                        .filter(key => !isNaN(parseInt(key))) // Filter keys that are numbers
-                                                        .map(key => (
-                                                            <li className={teamName !== "ManagementTeam" ? 'text-[17px] p-[2px]':'text-[25px] p-1' } key={key}>{teamData[key]}</li>
-                                                        ))}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </section>
-                                </section>
-                            ))}
-                        </div>
-                    </div>
+                </div>
             </section>
         </>
     );
@@ -198,4 +138,4 @@ const Overlay = ({setScrollDiv, scrollDiv,textContent, setTextContent}) => {
     )
 }
 
-export default Overlay
+export default Overlay;

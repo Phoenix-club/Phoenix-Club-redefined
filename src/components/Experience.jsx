@@ -1,12 +1,15 @@
-import { Html, OrbitControls, Reflector, ScrollControls, Text, useScroll } from '@react-three/drei'
+import { Html, OrbitControls, Plane, Reflector, ScrollControls, SpotLight, Text, useScroll } from '@react-three/drei'
 import React, { createContext, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { MathUtils, MeshNormalMaterial } from 'three'
-import Model  from './Map'
+import Model  from './Untitled'
 import Overlay from './Overlay'
 import { useFrame, useThree } from '@react-three/fiber'
 import gsap from 'gsap'
 import { ScrollToPlugin } from 'gsap/all'
 import { isMobile } from 'react-device-detect'
+import ImagePlane from './ImagePlane'
+import * as THREE from 'three'
+
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -17,6 +20,11 @@ const Experience = () => {
   const [textContent, setTextContent] = useState('')
   const { camera } = useThree();
   const [ scrollDiv, setScrollDiv ] = useState(0)
+  const { gl } = useThree()
+  useEffect(() => {
+    gl.shadowMap.enabled = true
+    gl.shadowMap.type = THREE.VSMShadowMap
+  }, [gl])
 
   const textPosition = useRef({ x: 0, y: 0, z: -1 })
   const textRotation = useRef({ x: 0, y: 0, z: 0 })
@@ -33,7 +41,7 @@ const Experience = () => {
         newPosition.x = -0.5
         break
       case 'Secretaries':
-        newPosition = {x: -0.3, y: 0.2, z: -0.5}
+        newPosition = {x: -0.3, y: 0.4, z: -0.5}
         break
       case 'Treasurers':
         newPosition = { x: -0.56, y: -0.2, z: -0.6}
@@ -54,7 +62,7 @@ const Experience = () => {
     // Animate position smoothly
     gsap.to(textPosition.current, {
       ...newPosition,
-      duration: 3,
+      duration: 2.5,
       ease: 'power2.out',
     })
 
@@ -67,7 +75,7 @@ const Experience = () => {
   }, [textContent])
 
   // Apply animation on each frame
-  useFrame(() => {
+  useEffect(() => {
     if (textRef.current) {
       textRef.current.position.set(
         textPosition.current.x,
@@ -80,24 +88,21 @@ const Experience = () => {
         textRotation.current.z
       )
     }
-  })
+  },[textRef])
 
   return (<>
     {/* Lightings */}
     {/* <ambientLight intensity={0.2}/> */}
-    <spotLight
-        ref={lightRef}
-        position={[0, 3, 2]}  // Light coming from one side
-        intensity={80}          // Adjust brightness
-        castShadow
-        distance={80}
-        angle={Math.PI/9}
-        power={50}    
-        penumbra={1}
-      />
-    <OrbitControls enableRotate={false} enableZoom={false} />
+    <pointLight
+      ref={lightRef}
+      position={[0, 3, 2]}  // Light coming from one side
+      intensity={500}       // Adjust brightness
+      distance={80}
+      power={100}  
+    />
+    {/* <OrbitControls/> */}
     {/* text behind the model */}
-    <Text
+    {/* <Text
         ref={textRef}
         key={textContent}
         position={[0, 0, -1]}
@@ -108,9 +113,10 @@ const Experience = () => {
         className='h-screen flex flex-col justify-center'
         >
           {textContent}
-        </Text>
+        </Text> */}
         {/* Model */}
-      <Model textContent={textContent} setTextContent={setTextContent} scrollDiv={scrollDiv} setScrollDiv={setScrollDiv} />
+      <Model textContent={textContent} />
+      <ImagePlane textContent={textContent} />
     <Overlay scrollDiv={scrollDiv} setScrollDiv={setScrollDiv} textContent={textContent} setTextContent={setTextContent} />
   </>
   )

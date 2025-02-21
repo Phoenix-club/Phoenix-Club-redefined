@@ -1,38 +1,56 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import * as THREE from 'three';
+import React, { Suspense, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import Experience from './Experience.jsx'
+import Experience from './Experience.jsx';
 import { ScrollControls } from '@react-three/drei';
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { KernelSize } from 'postprocessing';
 
 const Members = () => {
+  const [isLowEndDevice, setIsLowEndDevice] = useState(false);
+  
+  useEffect(() => {
+    // Simple performance detection
+    const fps = navigator.hardwareConcurrency;
+    const isMobile = /webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    setIsLowEndDevice(fps <= 4 || isMobile);
+  }, []);
 
   return (
-    <motion.div className='w-screen h-screen'>
-      <Canvas
-      camera={{
-        fov:60,
-        position: [0, 1, 1]
-      }}
-      style={{
-        background:"#111111"
-      }}
-      shadows
-      >
-        <ScrollControls>
-          <Experience />  
-        </ScrollControls>
-      </Canvas>
+    <motion.div className="w-screen h-screen">
+      <Suspense fallback={<div className="w-full h-full bg-black" />}>
+        <Canvas
+          camera={{
+            fov: 60,
+            position: [0, 1, 1],
+            near: 0.1,
+            far: 100
+          }}
+          dpr={[1, isLowEndDevice ? 1.5 : 2]} // Limit DPR based on device capability
+          style={{
+            background: "#000000"
+          }}
+          performance={{ min: 0.5 }} // Allow performance scaling
+        >
+          <ScrollControls pages={3} /* specify how many pages to scroll */ damping={0.25}>
+            <Experience />
+          </ScrollControls>
+          
+          {!isLowEndDevice && (
+            <EffectComposer multisampling={0} /* disable multisampling for better performance */>
+              <Bloom
+                luminanceThreshold={0.6}
+                intensity={0.3}
+                luminanceSmoothing={0.4}
+                kernelSize={KernelSize.MEDIUM}
+                resolutionScale={0.1}
+              />
+            </EffectComposer>
+          )}
+        </Canvas>
+      </Suspense>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Members
+export default Members;
