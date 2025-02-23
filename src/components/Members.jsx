@@ -32,7 +32,7 @@ const Members = () => {
           }}
           performance={{ min: 0.5 }} // Allow performance scaling
         >
-          <ScrollControls pages={3} /* specify how many pages to scroll */ damping={0.25}>
+          <ScrollControls pages={0} /* specify how many pages to scroll */ damping={0.25}>
             <Experience />
           </ScrollControls>
           

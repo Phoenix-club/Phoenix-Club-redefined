@@ -3,11 +3,15 @@ import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/all';
 import React, { useEffect, useRef, useState } from 'react';
+import MouseFollower from './MouseFollower';
+import { isMobile } from 'react-device-detect';
 
 gsap.registerPlugin(ScrollToPlugin)
 
 const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
     const [title, setTitle] = useState('');
+    const [hov, setHov] = useState('');
+    const [cursor,  setCursor] = useState('../src/assets/space/AIM2.png')
     const data = {
         Presidents: {
             Leader: "Riddhi Singvi",
@@ -111,22 +115,157 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
     }
 
 
+
     return (
         <>
-            <section className='h-screen w-screen flex justify-between items-start p-5 pr-10 '>
-                <div className='h-[95vh] w-full gap-6 flex justify-between items-start text-[#fff]'>
-                    <div className='flex flex-col w-full h-1/3 items-start justify-between z-10 px-10 '>
-                        <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(1)}>Presidents</button>
-                        <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(4)}>Secretaries</button>
-                        <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(7)}>Treasurers</button>
-                        <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(3)}>TechTeam</button>
-                        <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(6)}>CreativeTeam</button>
-                        <button className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all' onClick={()=> handleClick(5)}>ManagementTeam</button>
+            <section className='h-screen w-screen flex max-sm:flex-col justify-between items-end overflow-clip cursor-none'>
+            { !isMobile && <MouseFollower hov={hov} cursor={cursor}/>}
+                <div className='h-full max-sm:h-1/2 w-full max-sm:w-full flex flex-col justify-between items-start text-[#fff] max-sm:flex-shrink-0'>
+                    <div className='flex flex-col w-full h-1/3 items-start gap-6 z-10 p-6 transition-all'>
+                {/* <img src="../src/assets/space/DECOR.png" className='h-10 opacity-60' alt="" /> */}
+                        <button 
+                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                            onMouseEnter={()=> {
+                                setCursor('../src/assets/space/SINFO.png')
+                                setHov('Presidents')
+                            }} 
+                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                            onClick={()=> handleClick(1)} >
+                            Presidents
+                        </button>
+                        <button
+                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                            onMouseEnter={()=> {
+                                setCursor('../src/assets/space/SINFO.png')
+                                setHov('Secretaries')
+                            }} 
+                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                            onClick={()=> handleClick(4)}>
+                            Secretaries
+                        </button>
+                        <button 
+                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                            onMouseEnter={()=> {
+                                setCursor('../src/assets/space/SINFO.png')
+                                setHov('Treasurers')
+                            }} 
+                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                            onClick={()=> handleClick(7)}>
+                            Treasurers
+                        </button>
+                        <button 
+                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                            onMouseEnter={()=> {
+                                setCursor('../src/assets/space/SINFO.png')
+                                setHov('TechTeam')
+                            }} 
+                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                            onClick={()=> handleClick(3)}>
+                            TechTeam
+                        </button>
+                        <button 
+                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                            onMouseEnter={()=> {
+                                setCursor('../src/assets/space/SINFO.png')
+                                setHov('CreativeTeam')
+                            }} 
+                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                            onClick={()=> handleClick(6)}>
+                            CreativeTeam
+                        </button>
+                        <button 
+                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                            onMouseEnter={()=> {
+                                setCursor('../src/assets/space/SINFO.png')
+                                setHov('ManagementTeam')
+                            }} 
+                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                            onClick={()=> handleClick(5)}>
+                            ManagementTeam
+                        </button>
                     </div>
+                    { !isMobile && <div className='h-32 w-full flex opacity-80 justify-start relative transition-all'>
+                        <h1 className='z-10 px-8 py-10 text-[#FFD338] font-pixelSans text-4xl'>
+                            <FPSCounter/>
+                        </h1>
+                        <img src="../src/assets/space/DECOR1.png" className='h-32 absolute' alt="" />
+                        {/* <img src="../src/assets/space/CORNER.png" className='rotate-180 h-28 w-28' alt="" /> */}
+                    </div>}
                 </div>
+                <AnimatePresence>
+                {title && data[title] && Object.keys(data[title]).some(key => !isNaN(key)) && (
+                    <motion.div 
+                    className="h-full max-sm:h-1/2 flex max-sm:mb-12 flex-col justify-start items-center max-sm:justify-start"
+                    initial={{ opacity:0, x: "100%", y:isMobile ? "10%": "0%"  }}
+                    animate={{ opacity:0.7, x: isMobile ? "0%": "3%" }}
+                    exit={{ opacity:0, x:"100%"}}
+                    transition={{ ease:"circInOut", duration:0.5 }}
+                    style={{
+                        backgroundImage:isMobile ?"url('../src/assets/space/MINFO.png')": "url('../src/assets/space/INFO.png')",
+                        backgroundSize: "contain", // Ensures full image display
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        minHeight: "300px", // Ensures the background is visible
+                        width: "100%", // Responsive width
+                        maxWidth: "600px", // Prevents overflow
+                        padding: "2rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        // justifyContent: "center",
+                      }}
+                    >
+                        <h2 className="text-4xl max-sm:text-xl max-sm:p-3 p-10 font-sans text-[#fff] font-bold" >Team Members </h2>
+                        {/* <img className='inset-0' src="../src/assets/space/INFO.png" alt="" /> */}
+                        <ul className='text-[#ffff] items-center w-1/3 max-sm:w-fit max-sm:text-lg max-sm:overflow-x-scroll max-sm:h-fit font-pixelSans text-2xl flex flex-col text-nowrap gap-5'>
+                            {Object.keys(data[title])
+                                .filter(key => !isNaN(key)) 
+                                .map((key) => (
+                                    <li key={key} className="text-white">
+                                        {data[title][key]}
+                                    </li>
+                                ))}
+                        </ul>
+                    </motion.div>
+                )}
+                </AnimatePresence>
             </section>
         </>
     );
+};
+
+const FPSCounter = () => {
+  const [fps, setFPS] = useState(0);
+  const frameCount = useRef(0);
+  const lastTime = useRef(performance.now());
+  const animationFrameId = useRef(null);
+
+  useEffect(() => {
+    const updateFPS = () => {
+      frameCount.current++;
+      const currentTime = performance.now();
+      const deltaTime = currentTime - lastTime.current;
+
+      if (deltaTime >= 2500) {
+        setFPS(Math.round((frameCount.current * 1000) / deltaTime));
+        frameCount.current = 0;
+        lastTime.current = currentTime;
+      }
+
+      animationFrameId.current = requestAnimationFrame(updateFPS);
+    };
+
+    animationFrameId.current = requestAnimationFrame(updateFPS);
+
+    // Cleanup
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, []);
+
+  return (fps);
 };
 
 

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useMemo, useState } from "react";
 import { useGLTF, useDetectGPU } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import gsap from "gsap";
+import { metalness } from "three/tsl";
 
 const Model = ({ textContent, ...props }) => {
   const ref = useRef();
@@ -28,7 +29,7 @@ const Model = ({ textContent, ...props }) => {
   const positionMap = useMemo(() => ({
     Presidents: { x: -5.7, y: 0.15, z: 4.6, rx: 0, ry: 0, rz: 0 },
     Secretaries: { x: 1.5, y: 0, z: 6.9, rx: 0, ry: Math.PI / 2, rz: 0 },
-    Treasurers: { x: 5.5, y: -0.5, z: -1.6, rx: 0, ry: Math.PI, rz: 0 },
+    Treasurers: { x: 5.5, y: -0.1, z: -1.6, rx: 0, ry: Math.PI, rz: 0 },
     CreativeTeam: { x: -0.1, y: 0, z: 9, rx: 0, ry: Math.PI / 3, rz: 0 },
     ManagementTeam: { x: -6.9, y: 0, z: 1.5, rx: 0, ry: 0, rz: 0 },
     TechTeam: { x: -3, y: -0.5, z: -2, rx: 0, ry: -Math.PI * 0.5, rz: 0 }

@@ -15,7 +15,6 @@ gsap.registerPlugin(ScrollToPlugin);
 
 const Experience = () => {
 
-  const lightRef = useRef();
   const textRef = useRef();
   const [textContent, setTextContent] = useState('')
   const { camera } = useThree();
@@ -92,28 +91,12 @@ const Experience = () => {
 
   return (<>
     {/* Lightings */}
-    {/* <ambientLight intensity={0.2}/> */}
+    <ambientLight color={"#F5F591"} intensity={0.2}/>
     <pointLight
-      ref={lightRef}
-      position={[0, 3, 2]}  // Light coming from one side
-      intensity={500}       // Adjust brightness
-      distance={80}
-      power={100}  
+      position={[0, 5, 5]}
+      power={1}
+      intensity={50}
     />
-    {/* <OrbitControls/> */}
-    {/* text behind the model */}
-    {/* <Text
-        ref={textRef}
-        key={textContent}
-        position={[0, 0, -1]}
-        fontSize={0.15}
-        color="white"
-        anchorX="left"
-        anchorY="middle"
-        className='h-screen flex flex-col justify-center'
-        >
-          {textContent}
-        </Text> */}
         {/* Model */}
       <Model textContent={textContent} />
       <ImagePlane textContent={textContent} />
