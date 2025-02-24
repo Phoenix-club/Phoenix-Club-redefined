@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { KernelSize } from 'postprocessing';
+import { isMobile } from 'react-device-detect'
 
 
 
@@ -180,7 +181,7 @@ const ImagePlane = ({ textContent }) => {
 
   return (
     <>
-    <Plane ref={planeRef1} args={[0.9, 0.5]} position={[0, 0, -1]} rotation={[-Math.PI / 2, 0, 0]} castShadow >
+    <Plane ref={planeRef1} args={isMobile ? [0.6, 0.35] :[0.9, 0.5]} position={[0, 0, -1]} rotation={[-Math.PI / 2, 0, 0]} castShadow >
       <meshStandardMaterial attach="material" map={texture1} transparent alphaTest={0.5} depthWrite={false}  />
     </Plane>
     <Plane ref={planeRef2} args={[0.9, 0.5]} position={[0, 0, -1]} rotation={[-Math.PI / 2, 0, 0]} castShadow >

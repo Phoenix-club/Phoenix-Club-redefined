@@ -7,6 +7,7 @@ import { Route, Routes, useLocation } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loader from './Loader';
 import { label } from 'framer-motion/client';
+import Registration from './Registration';
 
 const Home = () => {
 
@@ -38,6 +39,10 @@ const Home = () => {
           setImage('../src/assets/car.gif')
           break;
 
+      case '/register':
+          setImage('../src/assets/ticking.gif')
+          break;
+
       default:
         setImage('../src/assets/car.gif')
         break;
@@ -61,6 +66,7 @@ const Home = () => {
         <Routes location={location}>
           <Route index path='/' element={<HeroSection />} />
           <Route path='/announcements' element={<Announcements />} />
+          <Route path='/register' element={<Registration />} />
           <Route path='/members' element={<Members />}/>
           <Route path='/loader' element={<Loader />}/>
         </Routes>

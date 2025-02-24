@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollToPlugin)
 const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
     const [title, setTitle] = useState('');
     const [hov, setHov] = useState('');
+    const [click, setClick ] = useState(false)
     const [cursor,  setCursor] = useState('../src/assets/space/AIM2.png')
     const data = {
         Presidents: {
@@ -119,69 +120,79 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
     return (
         <>
             <section className='h-screen w-screen flex max-sm:flex-col justify-between items-end overflow-clip cursor-none'>
+                {/* Cutom cursor */}
             { !isMobile && <MouseFollower hov={hov} cursor={cursor}/>}
-                <div className='h-full max-sm:h-1/2 w-full max-sm:w-full flex flex-col justify-between items-start text-[#fff] max-sm:flex-shrink-0'>
-                    <div className='flex flex-col w-full h-1/3 items-start gap-6 z-10 p-6 transition-all'>
-                {/* <img src="../src/assets/space/DECOR.png" className='h-10 opacity-60' alt="" /> */}
-                        <button 
-                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
-                            onMouseEnter={()=> {
-                                setCursor('../src/assets/space/SINFO.png')
-                                setHov('Presidents')
-                            }} 
-                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
-                            onClick={()=> handleClick(1)} >
-                            Presidents
-                        </button>
-                        <button
-                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
-                            onMouseEnter={()=> {
-                                setCursor('../src/assets/space/SINFO.png')
-                                setHov('Secretaries')
-                            }} 
-                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
-                            onClick={()=> handleClick(4)}>
-                            Secretaries
-                        </button>
-                        <button 
-                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
-                            onMouseEnter={()=> {
-                                setCursor('../src/assets/space/SINFO.png')
-                                setHov('Treasurers')
-                            }} 
-                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
-                            onClick={()=> handleClick(7)}>
-                            Treasurers
-                        </button>
-                        <button 
-                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
-                            onMouseEnter={()=> {
-                                setCursor('../src/assets/space/SINFO.png')
-                                setHov('TechTeam')
-                            }} 
-                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
-                            onClick={()=> handleClick(3)}>
-                            TechTeam
-                        </button>
-                        <button 
-                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
-                            onMouseEnter={()=> {
-                                setCursor('../src/assets/space/SINFO.png')
-                                setHov('CreativeTeam')
-                            }} 
-                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
-                            onClick={()=> handleClick(6)}>
-                            CreativeTeam
-                        </button>
-                        <button 
-                            className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
-                            onMouseEnter={()=> {
-                                setCursor('../src/assets/space/SINFO.png')
-                                setHov('ManagementTeam')
-                            }} 
-                            onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
-                            onClick={()=> handleClick(5)}>
-                            ManagementTeam
+                {/* navbar */}
+                <div className='h-full max-sm:h-1/2 w-full max-sm:w-full flex flex-col justify-between items-start text-[#fff] max-sm:flex-shrink-0 '>
+                    <div className='w-full h-full flex'>
+                        <div
+                        className={` ${ isMobile && `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-70 bg-no-repeat`} flex flex-col w-full h-fit items-start gap-6 z-10 p-6 transition-all flex-shrink-0 duration-500`}
+                        onClick={()=>setClick(!click)}
+                        >
+                    {/* <img src="../src/assets/space/DECOR.png" className='h-10 opacity-60' alt="" /> */}
+                            <button 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                onMouseEnter={()=> {
+                                    setCursor('../src/assets/space/SINFO.png')
+                                    setHov('Presidents')
+                                }} 
+                                onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                                onClick={()=>{ handleClick(1)}} >
+                                Presidents
+                            </button>
+                            <button
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                onMouseEnter={()=> {
+                                    setCursor('../src/assets/space/SINFO.png')
+                                    setHov('Secretaries')
+                                }} 
+                                onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                                onClick={()=> handleClick(4)}>
+                                Secretaries
+                            </button>
+                            <button 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                onMouseEnter={()=> {
+                                    setCursor('../src/assets/space/SINFO.png')
+                                    setHov('Treasurers')
+                                }} 
+                                onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                                onClick={()=> handleClick(7)}>
+                                Treasurers
+                            </button>
+                            <button 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                onMouseEnter={()=> {
+                                    setCursor('../src/assets/space/SINFO.png')
+                                    setHov('TechTeam')
+                                }} 
+                                onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                                onClick={()=> handleClick(3)}>
+                                TechTeam
+                            </button>
+                            <button 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                onMouseEnter={()=> {
+                                    setCursor('../src/assets/space/SINFO.png')
+                                    setHov('CreativeTeam')
+                                }} 
+                                onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                                onClick={()=> handleClick(6)}>
+                                CreativeTeam
+                            </button>
+                            <button 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                onMouseEnter={()=> {
+                                    setCursor('../src/assets/space/SINFO.png')
+                                    setHov('ManagementTeam')
+                                }} 
+                                onMouseLeave={()=>setCursor('../src/assets/space/AIM2.png')}
+                                onClick={()=> handleClick(5)}>
+                                ManagementTeam
+                            </button>
+                        </div>
+                        <button className='backdrop-blur-sm'>
+
                         </button>
                     </div>
                     { !isMobile && <div className='h-32 w-full flex opacity-80 justify-start relative transition-all'>
