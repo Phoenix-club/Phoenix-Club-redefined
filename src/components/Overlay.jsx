@@ -126,7 +126,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                 <div className='h-full max-sm:h-1/2 w-full max-sm:w-full flex flex-col justify-between items-start text-[#fff] max-sm:flex-shrink-0 '>
                     <div className='w-full h-full flex'>
                         <div
-                        className={` ${ isMobile && `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-70 bg-no-repeat`} flex flex-col w-full h-fit items-start gap-6 z-10 p-6 transition-all flex-shrink-0 duration-500`}
+                        className={` ${ isMobile && `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-70 bg-no-repeat`} flex flex-col w-full h-fit items-start gap-6 z-10 p-6 transition-all flex-shrink-0 duration-500 ease-in-out`}
                         onClick={()=>setClick(!click)}
                         >
                     {/* <img src="../src/assets/space/DECOR.png" className='h-10 opacity-60' alt="" /> */}
@@ -206,11 +206,11 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                 <AnimatePresence>
                 {title && data[title] && Object.keys(data[title]).some(key => !isNaN(key)) && (
                     <motion.div 
-                    className="h-full max-sm:h-1/2 flex max-sm:mb-12 flex-col justify-start items-center max-sm:justify-start"
-                    initial={{ opacity:0, x: "100%", y:isMobile ? "10%": "0%"  }}
-                    animate={{ opacity:0.7, x: isMobile ? "0%": "3%" }}
-                    exit={{ opacity:0, x:"100%"}}
-                    transition={{ ease:"circInOut", duration:0.5 }}
+                    className={`h-full max-sm:h-1/2 flex max-sm:mb-12 flex-col opacity-70 justify-start items-center max-sm:justify-start `}
+                    initial={{ x: "100%",y:"-10%"}}
+                    animate={{ x: "0%",y:"-10%"}}
+                    exit={{x:"100%",y:"-10%"}}
+                    transition={{ ease:"easeInOut", duration:0.4 }}
                     style={{
                         backgroundImage:isMobile ?"url('../src/assets/space/MINFO.png')": "url('../src/assets/space/INFO.png')",
                         backgroundSize: "contain", // Ensures full image display

@@ -3,6 +3,7 @@ import { useGLTF, useDetectGPU } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import gsap from "gsap";
 import { metalness } from "three/tsl";
+import { isMobile } from "react-device-detect";
 
 const Model = ({ textContent, ...props }) => {
   const ref = useRef();
@@ -20,7 +21,7 @@ const Model = ({ textContent, ...props }) => {
   const [modelPath, setModelPath] = useState('src/assets/3d/untitled.glb');
   useEffect(() => {
     // If low-end device detected, use a lower poly model if available
-    if (isLowEndDevice) {
+    if (isLowEndDevice && isMobile) {
       // Ideally you would have a low-poly version at this path
       setModelPath('src/assets/3d/untitled_lowpoly.glb');
     }
