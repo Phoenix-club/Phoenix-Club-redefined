@@ -105,8 +105,6 @@ const Model = ({ textContent, ...props }) => {
   );
 };
 
-// Preload both high and low resolution models
-useGLTF.preload('/3d/untitled.glb');
 // Uncomment if you have a low-poly version
 useGLTF.preload('/3d/untitled_lowpoly.glb');
 
