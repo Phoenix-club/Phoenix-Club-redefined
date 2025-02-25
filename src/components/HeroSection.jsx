@@ -15,7 +15,7 @@ const HeroSection = ({ loading, setLoading, setImage}) => {
     gsap.to('.bg2',{
       // background
       duration:35,
-      x:"-10%",
+      x:"-1%",
       yoyo:true,
       repeat:-1,
       // ease:"linear",
