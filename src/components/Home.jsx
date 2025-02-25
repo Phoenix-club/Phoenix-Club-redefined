@@ -22,11 +22,6 @@ const Home = () => {
     const timer = setTimeout(() => {
       setLoading(false)
     }, 2000);
-
-    if(location.pathname === 'add-event'){
-      window.location.replace("http://127.0.0.1:8000/members/events/")
-    }
-
   },[location])
 
 
