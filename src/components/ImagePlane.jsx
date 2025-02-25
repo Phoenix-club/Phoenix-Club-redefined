@@ -110,7 +110,7 @@ const ImagePlane = ({ textContent }) => {
           
           newPosition2.y = 0.25
           newPosition2.x = (isMobile ? 0.25 : 0.5)
-          newPosition2.z = (isMobile ? -0.2 : 0.1)
+          newPosition2.z = (isMobile ? -0.1 : 0.1)
           newRotation2.x = -Math.PI /8
           newRotation2.y = -Math.PI /6
 

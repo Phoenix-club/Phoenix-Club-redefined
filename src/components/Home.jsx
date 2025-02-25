@@ -3,11 +3,12 @@ import "@fontsource/tilt-neon";
 import HeroSection from './HeroSection';
 import Announcements from './Announcements';
 import Members from './Members';
-import { Route, Routes, useLocation } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loader from './Loader';
 import { label } from 'framer-motion/client';
 import Registration from './Registration';
+import Overlay from './Overlay';
 
 const Home = () => {
 

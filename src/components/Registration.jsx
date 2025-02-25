@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const RegistrationForm = () => {
+
+  const client =  axios.create({
+    baseURL:"http://127.0.0.1:8000/"
+  })
+
+  const location = useLocation()
+  const [eventName, setEventName] = useState(location.state?.name)
+
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
     registrant_phone: '',
     branch: '',
     year: '',
-    event: 'celestial',
+    event: '',
     team_name: '',
     payment_screenshot: null,
     team_members: [{ name: '', email: '', phone: '' }]
@@ -55,8 +64,7 @@ const RegistrationForm = () => {
     });
 
     try {
-      const response = await axios.post(
-        'https://vast-civil-fawn.ngrok-free.app/register',
+      const response = await client.post('register/',
         formPayload,
         {
           headers: {
@@ -71,10 +79,10 @@ const RegistrationForm = () => {
       console.error('Registration failed:', error);
     }
   };
-
+  if(eventName!= null){
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Event Registration</h2>
+    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md text-[#fff]">
+      <h2 className="text-2xl font-bold mb-6">Event Registration : {eventName}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Main Registrant Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -85,7 +93,7 @@ const RegistrationForm = () => {
               name="registrant"
               value={formData.registrant}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-[#000]"
               required
             />
           </div>
@@ -96,7 +104,7 @@ const RegistrationForm = () => {
               name="registrant_email"
               value={formData.registrant_email}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-[#000]"
               required
             />
           </div>
@@ -107,7 +115,7 @@ const RegistrationForm = () => {
               name="registrant_phone"
               value={formData.registrant_phone}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-[#000]"
               pattern="[0-9]{10}"
               required
             />
@@ -119,7 +127,7 @@ const RegistrationForm = () => {
               name="branch"
               value={formData.branch}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-[#000]"
             />
           </div>
           <div>
@@ -129,7 +137,7 @@ const RegistrationForm = () => {
               name="year"
               value={formData.year}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-[#000]"
             />
           </div>
           <div>
@@ -139,7 +147,7 @@ const RegistrationForm = () => {
               name="team_name"
               value={formData.team_name}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-[#000]"
             />
           </div>
         </div>
@@ -150,7 +158,7 @@ const RegistrationForm = () => {
           <input
             type="file"
             onChange={handleFileChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-[#000]"
             accept="image/*"
           />
         </div>
@@ -166,7 +174,7 @@ const RegistrationForm = () => {
                   placeholder="Name"
                   value={member.name}
                   onChange={(e) => handleTeamMemberChange(index, 'name', e.target.value)}
-                  className="p-2 border rounded"
+                  className="p-2 border rounded text-[#000]"
                   required
                 />
                 <input
@@ -174,7 +182,7 @@ const RegistrationForm = () => {
                   placeholder="Email"
                   value={member.email}
                   onChange={(e) => handleTeamMemberChange(index, 'email', e.target.value)}
-                  className="p-2 border rounded"
+                  className="p-2 border rounded text-[#000]"
                   required
                 />
                 <input
@@ -182,7 +190,7 @@ const RegistrationForm = () => {
                   placeholder="Phone"
                   value={member.phone}
                   onChange={(e) => handleTeamMemberChange(index, 'phone', e.target.value)}
-                  className="p-2 border rounded"
+                  className="p-2 border rounded text-[#000]"
                   pattern="[0-9]{10}"
                 />
               </div>
@@ -190,7 +198,7 @@ const RegistrationForm = () => {
                 <button
                   type="button"
                   onClick={() => removeTeamMember(index)}
-                  className="mt-2 text-red-600 text-sm hover:text-red-800"
+                    className="mt-2 text-sm hover:text-red-800 text-[#000]"
                 >
                   Remove Member
                 </button>
@@ -200,7 +208,7 @@ const RegistrationForm = () => {
           <button
             type="button"
             onClick={addTeamMember}
-            className="mt-2 text-blue-600 hover:text-blue-800"
+            className="mt-2 text-[#000] hover:text-[#000]/70"
           >
             + Add Team Member
           </button>
@@ -209,13 +217,20 @@ const RegistrationForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+          className="w-full bg-[#fff] text-[#000] py-2 px-4 rounded hover:text-[#000]/70 transition-colors"
         >
           Register
         </button>
       </form>
     </div>
-  );
+  );}
+  else{
+    return(<div className='h-screen w-screen text-[#fff] bg-[#005] flex items-center justify-center'>
+        <h1 className='text-3xl font-pixelSans'>
+            Invalid Event
+        </h1>
+      </div>);
+  }
 };
 
 export default RegistrationForm;

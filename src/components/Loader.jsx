@@ -10,7 +10,7 @@ const Loader = ({ image }) => {
     animate={{opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.5, ease:'circInOut' }}
-    className='bg-[#000000] w-screen h-screen flex justify-center items-center'
+    className='bg-[#000000] w-screen h-screen flex justify-center items-center overflow-hidden'
     >
         <div className='w-fit h-1/4 flex flex-col justify-center items-center'>
           <img className='w-full h-full object-contain' src={image} alt="" />

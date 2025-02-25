@@ -5,13 +5,14 @@ import { ScrollToPlugin } from 'gsap/all';
 import React, { useEffect, useRef, useState } from 'react';
 import MouseFollower from './MouseFollower';
 import { isMobile } from 'react-device-detect';
+import { NavLink } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollToPlugin)
 
 const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
     const [title, setTitle] = useState('');
     const [hov, setHov] = useState('');
-    const [click, setClick ] = useState(false)
+    const [click, setClick ] = useState(true)
     const [cursor,  setCursor] = useState('../src/assets/space/AIM2.png')
     const data = {
         Presidents: {
@@ -124,14 +125,14 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
             { !isMobile && <MouseFollower hov={hov} cursor={cursor}/>}
                 {/* navbar */}
                 <div className='h-full max-sm:h-1/2 w-full max-sm:w-full flex flex-col justify-between items-start text-[#fff] max-sm:flex-shrink-0 '>
-                    <div className='w-full h-full flex'>
+                    <div className='w-full h-full max-sm:flex'>
                         <div
-                        className={` ${ isMobile && `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-70 bg-no-repeat`} flex flex-col w-full h-fit items-start gap-6 z-10 p-6 transition-all flex-shrink-0 duration-500 ease-in-out`}
+                        className={` ${ isMobile ? `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-80 bg-no-repeat` : `bg-no-repeat bg-cover bg-left-bottom w-[17rem] opacity-80 bg-[url("../src/assets/space/INFO3.png")]` } flex flex-col w-full h-[40vh] items-start max-md:gap-4 gap-7 font-pixelSans text-xl z-10 p-6 transition-all flex-shrink-0 duration-500 ease-in-out`}
                         onClick={()=>setClick(!click)}
                         >
                     {/* <img src="../src/assets/space/DECOR.png" className='h-10 opacity-60' alt="" /> */}
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('Presidents')
@@ -141,7 +142,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 Presidents
                             </button>
                             <button
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('Secretaries')
@@ -151,7 +152,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 Secretaries
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('Treasurers')
@@ -161,7 +162,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 Treasurers
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('TechTeam')
@@ -171,7 +172,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 TechTeam
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('CreativeTeam')
@@ -181,7 +182,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 CreativeTeam
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('ManagementTeam')
@@ -191,9 +192,9 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 ManagementTeam
                             </button>
                         </div>
-                        <button className='backdrop-blur-sm'>
-
-                        </button>
+                        {isMobile&& <span className='rotate-90 flex-shrink-0 text-[#fff]'>
+                            click here
+                        </span>}
                     </div>
                     { !isMobile && <div className='h-32 w-full flex opacity-80 justify-start relative transition-all'>
                         <h1 className='z-10 px-8 py-10 text-[#FFD338] font-pixelSans text-4xl'>
@@ -206,15 +207,15 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                 <AnimatePresence>
                 {title && data[title] && Object.keys(data[title]).some(key => !isNaN(key)) && (
                     <motion.div 
-                    className={`h-full max-sm:h-1/2 flex max-sm:mb-12 flex-col opacity-70 justify-start items-center max-sm:justify-start `}
-                    initial={{ x: "100%",y:"-10%"}}
-                    animate={{ x: "0%",y:"-10%"}}
-                    exit={{x:"100%",y:"-10%"}}
+                    className={`h-full max-sm:h-1/2 flex max-sm:mb-12 flex-col opacity-80 justify-start items-center max-sm:justify-start `}
+                    initial={{ x: "100%",y:isMobile ?"-10%" :"0%"}}
+                    animate={{ x: "0%",y:isMobile ?"-10%" :"0%"}}
+                    exit={{x:"100%",y:isMobile ?"-10%" :"0%"}}
                     transition={{ ease:"easeInOut", duration:0.4 }}
                     style={{
                         backgroundImage:isMobile ?"url('../src/assets/space/MINFO.png')": "url('../src/assets/space/INFO.png')",
                         backgroundSize: "contain", // Ensures full image display
-                        backgroundPosition: "center",
+                        backgroundPosition: "bottom",
                         backgroundRepeat: "no-repeat",
                         minHeight: "300px", // Ensures the background is visible
                         width: "100%", // Responsive width
@@ -223,12 +224,12 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        // justifyContent: "center",
+                        justifyContent: "center",
                       }}
                     >
-                        <h2 className="text-4xl max-sm:text-xl max-sm:p-3 p-10 font-sans text-[#fff] font-bold" >Team Members </h2>
+                        <h2 className="text-4xl max-sm:text-xl max-sm:p-3 p-10 font-pixelSans text-[#fff] font-bold" >Team Members </h2>
                         {/* <img className='inset-0' src="../src/assets/space/INFO.png" alt="" /> */}
-                        <ul className='text-[#ffff] items-center w-1/3 max-sm:w-fit max-sm:text-lg max-sm:overflow-x-scroll max-sm:h-fit font-pixelSans text-2xl flex flex-col text-nowrap gap-5'>
+                        <ul className='text-[#ffff] items-center w-1/3 max-sm:w-fit max-sm:text-lg max-sm:overflow-x-scroll max-sm:h-fit  text-2xl flex flex-col text-nowrap gap-5'>
                             {Object.keys(data[title])
                                 .filter(key => !isNaN(key)) 
                                 .map((key) => (
@@ -268,7 +269,6 @@ const FPSCounter = () => {
 
     animationFrameId.current = requestAnimationFrame(updateFPS);
 
-    // Cleanup
     return () => {
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);

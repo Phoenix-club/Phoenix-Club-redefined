@@ -1,145 +1,160 @@
 import { useGSAP } from '@gsap/react'
+import axios from 'axios'
 import gsap from 'gsap'
-import React, { useEffect, useState } from 'react'
-import { motion } from 'motion/react'
-import Loader from './Loader'
-import { NavLink } from 'react-router'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { isMobile } from 'react-device-detect'
+import { Link, NavLink } from 'react-router-dom'
 
-const Announcements = ({ loading, setLoading }) => {
-
-  const events = [
-    { event: "Code-Relay", desc: "Code relay is competition which combines DSA coding compatibility with Teamwork to achieve absolute sofware coding skills", image: "../src/assets/events/1.jpeg", active: true },
-    { event: "Prompt Quest", desc: "Explore your prompting skills using Prompt Quest and boost your creativity while competing", image: "../src/assets/events/prompt.JPG", active: false },
-    { event: "Pixel Perfect", desc: "Show your colors of imagination through Figma prototypes and aquire the skill of UI and UX design by participating in Pixel Perfect", image: "../src/assets/events/Pixel.JPG", active: false },
-  ]
-
-  const [event, setEvent] = useState(events[0])
-  useGSAP(() => {
-    gsap.to(['#paralx1', '#paralx8'], {
-      // background
-      duration: 55,
-      x: "5%",
-      yoyo: true,
-      repeat: -1,
-      // ease:"linear",
-    }),
-      gsap.to(['#paralx2', '#paralx6', '#paralx3'], {
-        // middleground
-        duration: 60,
-        x: "-15%",
-        yoyo: true,
-        repeat: -1,
-        // ease:"linear",
-      }),
-      gsap.to(['#paralx7', '#paralx4', '#paralx5'], {
-        // frontground
-        duration: 45,
-        x: "-10%",
-        yoyo: true,
-        repeat: -1,
-        // ease:"linear",
-      })
+const Announcements = () => {
+  const containerRef = useRef(null)
+  const currentDate = new Date();
+  const [events, setEvents] = useState([]) // Store all events
+  const [currentEvent, setCurrentEvent] = useState({}) // Store the current event
+  const client = axios.create({
+    baseURL: "http://127.0.0.1:8000/",
+    headers: {
+      'Content-Type': "application/json"
+    }
   })
 
-  const handleAnimationStart = () => {
-    document.body.style.overflow = 'hidden'; // Hide scrollbar
+  const parallaxRefs = {
+    background: [useRef(null), useRef(null)],
+    middleground: [useRef(null), useRef(null), useRef(null)],
+    frontground: [useRef(null), useRef(null), useRef(null)]
   };
 
+  const fetchData = async () => {
+    const response = await client.get('/events');
+    setEvents(response.data)
+    // Set the first event as the current event
+    if (response.data.length > 0) {
+      setCurrentEvent(response.data[0])
+    }
+  }
+
   useEffect(() => {
-    const hoverClick = document.querySelectorAll('.events');
+    fetchData()
+  }, [])
 
-    const handleClick = (e) => {
-      const clickedEvent = e.target.innerHTML;
-      const foundEvent = events.find(ev => ev.event === clickedEvent);
-      if (foundEvent) {
-        setEvent(foundEvent);
-      }
-    };
+  useGSAP(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(parallaxRefs.background.map(ref => ref.current), {
+        duration: 15, x: "1%", yoyo: true, repeat: -1, ease: "power1.inOut", force3D: true, lazy: true
+      });
 
-    //   setLoading(true)
-    //   if(loading){setTimeout(() => {
-    //     setLoading(false)
-    //   }, 1000)
-    // }
+      gsap.to(parallaxRefs.middleground.map(ref => ref.current), {
+        duration: 20, x: "-3%", yoyo: true, repeat: -1, ease: "power1.inOut", force3D: true, lazy: true
+      });
 
-    hoverClick.forEach(e => e.addEventListener('click', handleClick));
+      gsap.to(parallaxRefs.frontground.map(ref => ref.current), {
+        duration: 12, x: "2%", yoyo: true, repeat: -1, ease: "power1.inOut", force3D: true, lazy: true
+      });
+    }, containerRef);
 
-    return () => {
-      hoverClick.forEach(e => e.removeEventListener('click', handleClick));
-    };
-  }, [loading]);
+    return () => ctx.revert();
+  }, []);
 
+  const handleEventClick = useCallback((event) => {
+    setCurrentEvent(event)
+  }, []);
 
-  return (<>
-    <motion.div
-      // initial={{ opacity: 0 }}
-      // animate={{ opacity: 1 }}
-      // exit={{ opacity: 0 }}
-      id='container' className='w-full h-full flex  absolute rendering-pixelated justify-between items-start overflow-hidden  bg-[#17141C] '>
-      <h1 className='text-[#FDE37D] absolute right-10 top-12 text-7xl font-pixelSans scale-y-150 font-extrabold z-[5] transition-all duration-1000'>Announcements</h1>
+  return (
+    <div
+      ref={containerRef}
+      className='w-full h-full flex absolute justify-between items-start select-none overflow-hidden bg-[#17141C]'
+      style={{ willChange: "transform" }} // Enable GPU acceleration
+    >
+      <h1 className='text-[#FDE37D] absolute right-10 top-12 text-7xl max-md:text-4xl font-pixelSans font-extrabold z-10'>
+        Announcements
+      </h1>
 
       {/* Dashboard */}
       <section className='w-full h-full flex flex-col justify-between items-center p-7'>
-        <section className='w-full h-fit flex flex-col overflow-hidden  z-[10]'>
-          <div className='w-96 h-fit gap-10 p-5 border-l-4 border-t-4 border-[#fff] font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff] transition-all'>
-            <h1 className='text-5xl'>{event.event}</h1>
-            <p className='text-xl'>{event.desc}</p>
-            {event.active && <h2 className='text-xl transition-all  hover:cursor-context-menu'> Register Now</h2>}
+        <section className='w-full h-fit flex flex-col overflow-hidden pt-24 z-10'>
+          <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
+            <h1 className='text-5xl max-md:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
+            <p className='text-xl max-md:text-lg max-md:w-full w-1/2'>{currentEvent.description}</p>
+            {currentEvent.date > currentDate  ? 
+              <Link to={"/register"} state={{ name : currentEvent.name}} className='text-2xl hover:cursor-pointer text-[#1B9E64]'>
+                Register Now
+              </Link> : 
+              <h2 className='text-2xl hover:cursor-not-allowed text-nOran/70'>
+                Event Concluded, Try Next Time !
+              </h2>
+            }
+            <p className='text-lg pl-5'>Fees: ₹{currentEvent.fees}</p>
+            <p className='text-lg pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
+            <p className='text-lg pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
+            <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
+            <p className='text-lg pl-5'>Event Type: {currentEvent.event_type}</p>
+            <p className='text-lg pl-5'>Capacity: {currentEvent.event_capacity}</p>
+            <p className='text-lg pl-5'>Registered: {currentEvent.current_registration}</p>
           </div>
         </section>
-        <section className='flex items-end justify-end h-1/2 w-1/3  z-[5]'>
-          <img className='h-full w-full object-cover p-5 border-r-4 border-b-4 border-[#fff]' src={event.image} alt="" />
-        </section>
-      </section>
-      {/* Dashboard Titles  */}
-      <section className='w-[35rem] h-fit p-10 absolute pt-32 gap-5  z-10 font-pixelSans right-4 top-10 text-4xl text-[#fff]'>
-        <h1 className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'>Code-Relay</h1>
-        <h1 className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'>Prompt Quest</h1>
-        <h1 className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'>Pixel Perfect</h1>
+        {!isMobile && (
+          <section className='flex items-end justify-end h-1/2 w-1/3 z-10'>
+            <img
+              className='h-full w-full object-cover p-5 border-r-4 border-b-4 border-[#fff]'
+              src={currentEvent.poster}
+              loading="lazy"
+            />
+          </section>
+        )}
       </section>
 
-      {/* back section */}
-      <section id='paralx1' className='object-cover absolute left-0  h-full w-full flex z-[6] justify-end'>
-        <img loading='lazy' className='w-full h-full object-cover' src="../src/assets/cave/1.png" alt="" />
-        <img loading='lazy' className='w-full h-full object-cover' src="../src/assets/cave/1.png" alt="" />
+      {/* Dashboard Titles */}
+      <section className='w-[35rem] max-md:w-72 z-50 h-fit p-10 absolute right-4 max-md:right-0 top-64 max-md:top-[60%] text-4xl max-md:text-2xl font-pixelSans text-[#fff]'>
+        {events.map((event, index) => (
+          <h1
+            key={index}
+            className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'
+            onClick={() => handleEventClick(event)}
+          >
+            {event.name}
+          </h1>
+        ))}
       </section>
-      <section id='paralx2' className='object-cover absolute left-0  h-full w-full flex z-[5] '>
-        <img loading='lazy' className='object-cover ' src="../src/assets/cave/2.png" alt="" />
-        <img loading='lazy' className=' object-cover' src="../src/assets/cave/2.png" alt="" />
-      </section>
-      <section id='paralx3' className='object-cover absolute left-0  h-full w-full flex z-[4] '>
-        <img loading='lazy' className='object-cover' src="../src/assets/cave/3.png" alt="" />
-        <img loading='lazy' className=' object-cover' src="../src/assets/cave/3.png" alt="" />
-      </section>
-      <section id='paralx4' className='object-cover absolute left-0  h-full w-full flex z-[3] '>
-        <img loading='lazy' className='object-cover' src="../src/assets/cave/4.png" alt="" />
-        <img loading='lazy' className=' object-cover' src="../src/assets/cave/4.png" alt="" />
-      </section>
-      <section id='paralx5' className='object-cover absolute left-0  h-full w-full flex z-[2] '>
-        <img loading='lazy' className='object-cover' src="../src/assets/cave/5.png" alt="" />
-        <img loading='lazy' className=' object-cover' src="../src/assets/cave/5.png" alt="" />
-      </section>
-      <section id='paralx6' className='object-cover absolute left-0  h-full w-full flex z-[1] '>
-        <img loading='lazy' className='object-cover' src="../src/assets/cave/6.png" alt="" />
-        <img loading='lazy' className=' object-cover' src="../src/assets/cave/6.png" alt="" />
-      </section>
-      <NavLink id='viewTranstion' to={'/'} className='text-[#F6CAB6] group absolute z-50 bg-clip-text p-1 bottom-10 left-10 text-5xl h-fit font-pixelSans' viewTransition>
-        <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
-        <img className='object-contain w-[50px] scale-x-[-1] group-hover:-translate-x-3 transition-all' src="../src/assets/play.png" alt="" />
-           Home
-        </span> 
+
+      {/* Parallax Layers */}
+      {Array.from({ length: 6 }, (_, i) => {
+        const index = i + 1;
+        const refType = index <= 2 ? 'background' : index <= 4 ? 'middleground' : 'frontground';
+        const refIndex = refType === 'background' ? i : refType === 'middleground' ? i - 2 : i - 4;
+
+        return (
+          <section
+            key={`paralx${index}`}
+            ref={parallaxRefs[refType][refIndex]}
+            style={{ zIndex: 7 - index, willChange: "transform" }}
+            className='absolute left-0 h-full w-full flex'
+          >
+            <img
+              loading='lazy'
+              className='w-full h-full object-cover'
+              src={`/src/assets/cave/${index}.png`}
+              alt=""
+            />
+          </section>
+        );
+      })}
+
+      {/* Navigation */}
+      <NavLink
+        to='/'
+        className='text-[#F6CAB6] group absolute z-50 bottom-10 left-10 text-5xl max-md:text-3xl font-pixelSans'
+      >
+        <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 max-md:px-1 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
+          <img
+            className='object-contain w-[50px] max-md:w-9 scale-x-[-1] group-hover:-translate-x-3 transition-all'
+            src={"/src/assets/play.png"}
+            alt="Play icon"
+            loading="lazy"
+          />
+          Home
+        </span>
       </NavLink>
-      {/* <section id='paralx7' className='object-cover opacity-50  absolute left-0  h-full w-full flex z-[0] '>
-        <img className='object-cover' src="../src/assets/cave/7.png" alt="" />
-        <img className=' object-cover' src="../src/assets/cave/7.png" alt="" />
-        </section> */}
-      {/* <section id='paralx1' className='object-cover absolute left-0  h-full w-full flex z-[7] justify-end'>
-        <img className='object-cover' src="../src/assets/cave/9.png" alt="" />
-        <img className=' object-cover' src="../src/assets/cave/9.png" alt="" />
-        </section> */}
-    </motion.div>
-  </>
+    </div>
   )
 }
 
-export default Announcements
+export default Announcements;
