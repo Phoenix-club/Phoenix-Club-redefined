@@ -155,7 +155,7 @@ const Announcements = ({ setEventId }) => {
           <img
             className='object-contain w-[50px] max-md:w-9 scale-x-[-1] group-hover:-translate-x-3 transition-all'
             src={"/play.png"}
-            alt="Play icon"
+            alt=""
             loading="lazy"
           />
           Home
