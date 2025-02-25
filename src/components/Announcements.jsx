@@ -11,9 +11,10 @@ const Announcements = ({ setEventId }) => {
   const [events, setEvents] = useState([]) // Store all events
   const [currentEvent, setCurrentEvent] = useState({}) // Store the current event
   const client = axios.create({
-    baseURL: "http://127.0.0.1:8000/",
+    baseURL: "https://vast-civil-fawn.ngrok-free.app/",
     headers: {
-      'Content-Type': "application/json"
+      'Content-Type': "application/json",
+      'ngrok-skip-browser-warning': 'true' 
     }
   })
 
@@ -26,6 +27,7 @@ const Announcements = ({ setEventId }) => {
   const fetchData = async () => {
     const response = await client.get('/events');
     setEvents(response.data)
+    console.log(response.data)
     if (response.data.length > 0) {
       setCurrentEvent(response.data[0])
     }
@@ -66,7 +68,7 @@ const Announcements = ({ setEventId }) => {
       style={{ willChange: "transform" }} // Enable GPU acceleration
     >
       <h1 className='text-[#FDE37D] absolute right-10 top-12 max-lg:top-1 text-7xl max-lg:text-4xl font-pixelSans font-extrabold z-10'>
-        Announcements
+        Events
       </h1>
 
       {/* Dashboard */}
@@ -106,15 +108,19 @@ const Announcements = ({ setEventId }) => {
 
       {/* Dashboard Titles */}
       <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 absolute right-4 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-2xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
-        {events.map((event, index) => (
+      {Array.isArray(events) && events.length > 0 ? (
+  events.map((event, index) => (
           <h1
             key={index}
-            className='events border-[#FFF] hover:border-b-4 transition-all hover:px-5'
+            className="events border-[#FFF] hover:border-b-4 transition-all hover:px-5"
             onClick={() => handleEventClick(event)}
           >
             {event.name}
           </h1>
-        ))}
+        ))
+      ) : (
+        <p className="text-gray-400">No events available</p>  // Show message instead of breaking
+      )}
       </section>
 
       {/* Parallax Layers */}

@@ -58,10 +58,10 @@ const HeroSection = ({ loading, setLoading, setImage}) => {
     <h1 className='text-[#FDE37D] left-16 text-[10rem] max-md:text-5xl max-md:left-2 font-sans scale-y-150 font-extrabold absolute top-[3rem] z-10 '>PHOENIX CLUB</h1>
     <div className='w-fit max-md:w-[90vw] rounded-xl bg-[#181235]/70 border-4 p-5 pl-5 max-md:p-0 max-md:pl-0 border-[#FDE37D] flex flex-col absolute z-50 top-[60vh] left-16 max-md:left-4'>
     <div className='group w-full max-md:w-fit h-full flex justify-center items-center'>
-      {isMobile && <div className='h-10 w-10 flex justify-center items-center overflow-hidden '>
+      {isMobile && <div className='h-10 w-10 flex justify-start items-center overflow-hidden '>
         <img className='opacity-0 h-20 w-20 object-cover group-hover:opacity-100 transition-all' src="../src/assets/star.gif" alt="" />
       </div>}
-      <NavLink id='viewTranstion' to={'/announcements'} className='text-[#F6CAB6] w-fit p-1 pl-10 max-md:p-0 text-5xl max-md:text-3xl h-fit font-pixelSans' viewTransition> Announcements</NavLink>
+      <NavLink id='viewTranstion' to={'/announcements'} className='text-[#F6CAB6] w-fit p-1 pl-10 max-md:p-0 text-5xl max-md:text-3xl h-fit font-pixelSans' viewTransition> Events</NavLink>
     </div>
     <div className='group w-full max-md:w-fit h-full flex justify-start items-center'>
     {isMobile && <div className='h-10 w-10 flex justify-center items-center overflow-hidden '>

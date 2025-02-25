@@ -16,3 +16,19 @@ text{
     touch-action: pan-y !important;
     overflow: hidden;
 }
+.registration {
+    overflow-y: scroll; /* Ensure scrolling is enabled */
+  }
+  
+  .registration::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit-based browsers */
+  }
+  
+  .registration {
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  }
+  
+  .registration {
+    -ms-overflow-style: none; /* Hide scrollbar for IE and older Edge */
+  }
+  
