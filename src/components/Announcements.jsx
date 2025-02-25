@@ -139,7 +139,7 @@ const Announcements = ({ setEventId }) => {
             <img
               loading='lazy'
               className='w-full h-full object-cover'
-              src={`/src/assets/cave/${index}.png`}
+              src={`/cave/${index}.png`}
               alt=""
             />
           </section>
@@ -154,7 +154,7 @@ const Announcements = ({ setEventId }) => {
         <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 max-md:px-1 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
           <img
             className='object-contain w-[50px] max-md:w-9 scale-x-[-1] group-hover:-translate-x-3 transition-all'
-            src={"/src/assets/play.png"}
+            src={"/play.png"}
             alt="Play icon"
             loading="lazy"
           />

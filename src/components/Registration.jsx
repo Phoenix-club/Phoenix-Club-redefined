@@ -112,7 +112,7 @@ const Registration = ({ eventId }) => {
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
-      <div className="registration bg-[url('/src/assets/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg  text-[#fff]">
+      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg  text-[#fff]">
 
         <div className='w-fit h-full justify-self-center backdrop-blur-sm p-5 items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
@@ -263,7 +263,7 @@ const Registration = ({ eventId }) => {
           <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 max-md:px-1 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
             <img
               className='object-contain w-[50px] max-md:w-9 scale-x-[-1] group-hover:-translate-x-3 transition-all'
-              src={"/src/assets/play.png"}
+              src={"/play.png"}
               alt="Play icon"
               loading="lazy"
               />
@@ -285,7 +285,7 @@ const Registration = ({ eventId }) => {
           <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 max-md:px-1 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
             <img
               className='object-contain w-[50px] max-md:w-9 scale-x-[-1] group-hover:-translate-x-3 transition-all'
-              src={"/src/assets/play.png"}
+              src={"/play.png"}
               alt="Play icon"
               loading="lazy"
             />
