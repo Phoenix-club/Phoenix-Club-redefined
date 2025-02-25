@@ -14,7 +14,7 @@ const Home = () => {
 
   const [loading, setLoading] = useState(true)
   const [image, setImage] = useState('../src/assets/Phoenix.gif')
-  
+  const [eventId, setEventId] = useState(null)
   const location = useLocation()
 
   useEffect(()=>{
@@ -22,6 +22,10 @@ const Home = () => {
     const timer = setTimeout(() => {
       setLoading(false)
     }, 2000);
+
+    if(location.pathname === 'add-event'){
+      window.location.replace("http://127.0.0.1:8000/members/events/")
+    }
 
   },[location])
 
@@ -66,8 +70,8 @@ const Home = () => {
 
         <Routes location={location}>
           <Route index path='/' element={<HeroSection />} />
-          <Route path='/announcements' element={<Announcements />} />
-          <Route path='/register' element={<Registration />} />
+          <Route path='/announcements' element={<Announcements setEventId={setEventId} />} />
+          <Route path='/register' element={<Registration eventId={eventId} />} />
           <Route path='/members' element={<Members />}/>
           <Route path='/loader' element={<Loader />}/>
         </Routes>

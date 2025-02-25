@@ -5,7 +5,7 @@ import { ScrollToPlugin } from 'gsap/all';
 import React, { useEffect, useRef, useState } from 'react';
 import MouseFollower from './MouseFollower';
 import { isMobile } from 'react-device-detect';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -127,12 +127,12 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                 <div className='h-full max-sm:h-1/2 w-full max-sm:w-full flex flex-col justify-between items-start text-[#fff] max-sm:flex-shrink-0 '>
                     <div className='w-full h-full max-sm:flex'>
                         <div
-                        className={` ${ isMobile ? `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-80 bg-no-repeat` : `bg-no-repeat bg-cover bg-left-bottom w-[17rem] opacity-80 bg-[url("../src/assets/space/INFO3.png")]` } flex flex-col w-full h-[40vh] items-start max-md:gap-4 gap-7 font-pixelSans text-xl z-10 p-6 transition-all flex-shrink-0 duration-500 ease-in-out`}
+                        className={` ${ isMobile && `${click ? `translate-x-0 `: `-translate-x-[80%]`} bg-[url("../src/assets/space/INFO2.png")] overflow-visible bg-cover bg-bottom inset-0 opacity-80 bg-no-repeat` } flex flex-col h-[40vh] items-start max-md:gap-4 gap-7 font-pixelSans text-xl z-10 p-10 w-full transition-all duration-500 ease-in-out`}
                         onClick={()=>setClick(!click)}
                         >
                     {/* <img src="../src/assets/space/DECOR.png" className='h-10 opacity-60' alt="" /> */}
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 max-lg:-translate-x-3 transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('Presidents')
@@ -142,7 +142,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 Presidents
                             </button>
                             <button
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 max-lg:-translate-x-3   transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('Secretaries')
@@ -152,7 +152,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 Secretaries
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 max-lg:-translate-x-3   transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('Treasurers')
@@ -162,7 +162,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 Treasurers
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 max-lg:-translate-x-3   transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('TechTeam')
@@ -172,7 +172,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 TechTeam
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 max-lg:-translate-x-3   transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('CreativeTeam')
@@ -182,7 +182,7 @@ const Section = ({scrollDiv , setScrollDiv,textContent, setTextContent }) => {
                                 CreativeTeam
                             </button>
                             <button 
-                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 transition-all cursor-none' 
+                                className='hover:text-xl hover:border-b hover:px-3 hover:font-bold translate-x-9 max-lg:-translate-x-3   transition-all cursor-none' 
                                 onMouseEnter={()=> {
                                     setCursor('../src/assets/space/SINFO.png')
                                     setHov('ManagementTeam')
@@ -284,6 +284,11 @@ const Overlay = ({setScrollDiv, scrollDiv,textContent, setTextContent}) => {
     return (
         <Scroll html>
             <Section setScrollDiv={setScrollDiv} scrollDiv={scrollDiv} textContent={textContent} setTextContent={setTextContent} />
+            <a to={"/register"} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
+                  <span className='group-hover:hover:border-[#1B9E64] p-1 transition-all rounded-xl group-hover:hover:border-2'>
+                  Register Now
+                  </span>
+            </a> 
         </Scroll>
     )
 }

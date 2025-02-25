@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link, NavLink } from 'react-router-dom'
 
-const Announcements = () => {
+const Announcements = ({ setEventId }) => {
   const containerRef = useRef(null)
   const currentDate = new Date();
   const [events, setEvents] = useState([]) // Store all events
@@ -26,7 +26,6 @@ const Announcements = () => {
   const fetchData = async () => {
     const response = await client.get('/events');
     setEvents(response.data)
-    // Set the first event as the current event
     if (response.data.length > 0) {
       setCurrentEvent(response.data[0])
     }
@@ -35,6 +34,8 @@ const Announcements = () => {
   useEffect(() => {
     fetchData()
   }, [])
+
+  const backendDate = currentEvent?.date ? new Date(currentEvent.date) : null;
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
@@ -61,34 +62,35 @@ const Announcements = () => {
   return (
     <div
       ref={containerRef}
-      className='w-full h-full flex absolute justify-between items-start select-none overflow-hidden bg-[#17141C]'
+      className='w-full h-full flex absolute justify-between items-start select-none overflow-y-scroll overflow-x-hidden bg-[#17141C]'
       style={{ willChange: "transform" }} // Enable GPU acceleration
     >
-      <h1 className='text-[#FDE37D] absolute right-10 top-12 text-7xl max-md:text-4xl font-pixelSans font-extrabold z-10'>
+      <h1 className='text-[#FDE37D] absolute right-10 top-12 max-lg:top-1 text-7xl max-lg:text-4xl font-pixelSans font-extrabold z-10'>
         Announcements
       </h1>
 
       {/* Dashboard */}
       <section className='w-full h-full flex flex-col justify-between items-center p-7'>
-        <section className='w-full h-fit flex flex-col overflow-hidden pt-24 z-10'>
+        <section className='w-full h-fit flex flex-col overflow-visible pt-5 z-10'>
           <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
-            <h1 className='text-5xl max-md:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
-            <p className='text-xl max-md:text-lg max-md:w-full w-1/2'>{currentEvent.description}</p>
-            {currentEvent.date > currentDate  ? 
-              <Link to={"/register"} state={{ name : currentEvent.name}} className='text-2xl hover:cursor-pointer text-[#1B9E64]'>
-                Register Now
-              </Link> : 
-              <h2 className='text-2xl hover:cursor-not-allowed text-nOran/70'>
-                Event Concluded, Try Next Time !
-              </h2>
-            }
-            <p className='text-lg pl-5'>Fees: ₹{currentEvent.fees}</p>
-            <p className='text-lg pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
-            <p className='text-lg pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
-            <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
-            <p className='text-lg pl-5'>Event Type: {currentEvent.event_type}</p>
-            <p className='text-lg pl-5'>Capacity: {currentEvent.event_capacity}</p>
-            <p className='text-lg pl-5'>Registered: {currentEvent.current_registration}</p>
+            <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
+            <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
+              <p className='text-xl max-md:text-lg max-md:w-full w-1/2'>{currentEvent.description}</p>
+              <p className='text-lg pl-5'>Fees: ₹{currentEvent.fees}</p>
+              <p className='text-lg pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
+              <p className='text-lg pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
+              <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
+              {backendDate > currentDate  ? 
+                <Link onClick={()=> setEventId(currentEvent.id)} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
+                  <span className='group-hover:hover:border-[#1B9E64] p-1 transition-all rounded-xl group-hover:hover:border-2'>
+                  Register Now
+                  </span>
+                </Link> : 
+                <h2 className='text-2xl hover:cursor-not-allowed text-nOran/70'>
+                  Event Concluded, Try Next Time !
+                </h2>
+              }
+            </span>
           </div>
         </section>
         {!isMobile && (
@@ -103,7 +105,7 @@ const Announcements = () => {
       </section>
 
       {/* Dashboard Titles */}
-      <section className='w-[35rem] max-md:w-72 z-50 h-fit p-10 absolute right-4 max-md:right-0 top-64 max-md:top-[60%] text-4xl max-md:text-2xl font-pixelSans text-[#fff]'>
+      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 absolute right-4 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-2xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
         {events.map((event, index) => (
           <h1
             key={index}

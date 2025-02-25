@@ -21,7 +21,7 @@ const Model = ({ textContent, ...props }) => {
   const [modelPath, setModelPath] = useState('src/assets/3d/untitled.glb');
   useEffect(() => {
     // If low-end device detected, use a lower poly model if available
-    if (isLowEndDevice && isMobile) {
+    if (isLowEndDevice || isMobile) {
       // Ideally you would have a low-poly version at this path
       setModelPath('src/assets/3d/untitled_lowpoly.glb');
     }
@@ -53,7 +53,7 @@ const Model = ({ textContent, ...props }) => {
       gsap.to(
         ObjPosition.current,{
           ...newValues,
-          duration: isLowEndDevice ? 1.5 : 2,
+          duration: isLowEndDevice ? 2.5 : 2,
           ease: easingCurve 
       });
       gsap.to(
@@ -61,7 +61,7 @@ const Model = ({ textContent, ...props }) => {
           x: newValues.rx, 
           y: newValues.ry, 
           z: newValues.rz, 
-          duration: isLowEndDevice ? 1.5 : 2, 
+          duration: isLowEndDevice ? 2.5 : 2, 
           ease: easingCurve });
     }
   }, [textContent, positionMap, isLowEndDevice]);
