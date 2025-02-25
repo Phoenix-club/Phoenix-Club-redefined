@@ -4,7 +4,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const Registration = ({ eventId }) => {
   const client = axios.create({
-    baseURL: "https://vast-civil-fawn.ngrok-free.app/",
+    baseURL: "https://phoenixkkw.pythonanywhere.com/",
     headers:{
       'ngrok-skip-browser-warning': 'true' 
     }

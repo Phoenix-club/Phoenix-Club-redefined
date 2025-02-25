@@ -13,7 +13,7 @@ import Overlay from './Overlay';
 const Home = () => {
 
   const [loading, setLoading] = useState(true)
-  const [image, setImage] = useState('../src/assets/Phoenix.gif')
+  const [image, setImage] = useState('/src/assets/car.gif')
   const [eventId, setEventId] = useState(null)
   const location = useLocation()
 
@@ -28,23 +28,23 @@ const Home = () => {
   useEffect(()=>{
     switch (location.pathname) {
       case '/announcements':
-        setImage('../src/assets/minero.gif ')
+        setImage('/src/assets/minero.gif ')
         break;
 
       case '/members':
-        setImage('../src/assets/spaceship.gif')
+        setImage('/src/assets/spaceship.gif')
         break;
 
       case '':
-          setImage('../src/assets/car.gif')
+          setImage('/src/assets/car.gif')
           break;
 
       case '/register':
-          setImage('../src/assets/ticking.gif')
+          setImage('/src/assets/ticking.gif')
           break;
 
       default:
-        setImage('../src/assets/car.gif')
+        setImage('/src/assets/car.gif')
         break;
     }
 

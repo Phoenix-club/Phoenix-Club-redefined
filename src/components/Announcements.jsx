@@ -11,7 +11,7 @@ const Announcements = ({ setEventId }) => {
   const [events, setEvents] = useState([]) // Store all events
   const [currentEvent, setCurrentEvent] = useState({}) // Store the current event
   const client = axios.create({
-    baseURL: "https://vast-civil-fawn.ngrok-free.app/",
+    baseURL: "https://phoenixkkw.pythonanywhere.com/",
     headers: {
       'Content-Type': "application/json",
       'ngrok-skip-browser-warning': 'true' 

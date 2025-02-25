@@ -25,15 +25,15 @@ const MouseFollower = ({ cursor, hov }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className={cursor !== "../src/assets/space/AIM2.png" && `pt-24 pl-48 z-50 ` } style={styles.container}>
-        {cursor !== "../src/assets/space/AIM2.png" && <h1 className="absolute z-10 py-2 px-3 w-fit font-pixelSans text-xl text-[#FFD338]"> . . . Travel To {hov} Section</h1>}
+    <div ref={containerRef} className={cursor !== "/src/assets/space/AIM2.png" && `pt-24 pl-48 z-50 ` } style={styles.container}>
+        {cursor !== "/src/assets/space/AIM2.png" && <h1 className="absolute z-10 py-2 px-3 w-fit font-pixelSans text-xl text-[#FFD338]"> . . . Travel To {hov} Section</h1>}
       <img
         src={cursor}
         alt="+"
         style={{
-          width: cursor === "../src/assets/space/AIM2.png" ? "40px" : "250px",
-          height: cursor === "../src/assets/space/AIM2.png" ? "40px" : "110px",
-          opacity: cursor === "../src/assets/space/AIM2.png" ? "1" : "0.7",
+          width: cursor === "/src/assets/space/AIM2.png" ? "40px" : "250px",
+          height: cursor === "/src/assets/space/AIM2.png" ? "40px" : "110px",
+          opacity: cursor === "/src/assets/space/AIM2.png" ? "1" : "0.7",
         }}
       />
     </div>

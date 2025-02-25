@@ -3,16 +3,14 @@ import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { KernelSize } from 'postprocessing';
 import { isMobile } from 'react-device-detect'
 
 
 
 
 const ImagePlane = ({ textContent }) => {
-  const [textureUrl1, setTextureUrl1] = useState("../src/assets/members/NULL.png");
-  const [textureUrl2, setTextureUrl2] = useState("../src/assets/members/NULL.png");
+  const [textureUrl1, setTextureUrl1] = useState("/src/assets/members/NULL.png");
+  const [textureUrl2, setTextureUrl2] = useState("/src/assets/members/NULL.png");
 
     const planeRef1 = useRef()
     const planeRef2 = useRef()
@@ -47,8 +45,8 @@ const ImagePlane = ({ textContent }) => {
           newPosition2.z = (isMobile ? 0.15 : 0.1)
           newRotation2.x = -Math.PI /4
 
-          setTextureUrl1('../src/assets/members/RIDDHI.png')
-          setTextureUrl2('../src/assets/members/ASUS.png')
+          setTextureUrl1('/src/assets/members/RIDDHI.png')
+          setTextureUrl2('/src/assets/members/ASUS.png')
           break
         case 'Secretaries':
           newPosition1.y = 0.5
@@ -62,8 +60,8 @@ const ImagePlane = ({ textContent }) => {
           newPosition2.z = (isMobile ? 0 : 0.07)
           newRotation2.x = -Math.PI /4
 
-          setTextureUrl1('../src/assets/members/VIDHEE.png')
-          setTextureUrl2('../src/assets/members/ARYAN.png')
+          setTextureUrl1('/src/assets/members/VIDHEE.png')
+          setTextureUrl2('/src/assets/members/ARYAN.png')
           break
         case 'Treasurers':
           newPosition1.y = 0.3
@@ -78,8 +76,8 @@ const ImagePlane = ({ textContent }) => {
           newRotation2.x = -Math.PI /6
           newRotation2.y = -Math.PI /6
 
-          setTextureUrl1('../src/assets/members/UDAY.png')
-          setTextureUrl2('../src/assets/members/ATHARVA.png')
+          setTextureUrl1('/src/assets/members/UDAY.png')
+          setTextureUrl2('/src/assets/members/ATHARVA.png')
           break
         case 'CreativeTeam':
           newPosition1.y = 0.3
@@ -94,12 +92,12 @@ const ImagePlane = ({ textContent }) => {
           newRotation2.x = -Math.PI /8
           newRotation2.y = (isMobile ? Math.PI /8 : -Math.PI /8)
 
-          setTextureUrl1('../src/assets/members/PRATIK.png')
-          setTextureUrl2('../src/assets/members/SIDDHI.png')
+          setTextureUrl1('/src/assets/members/PRATIK.png')
+          setTextureUrl2('/src/assets/members/SIDDHI.png')
           break
         case 'ManagementTeam':
-          setTextureUrl1('../src/assets/members/NULL.png')
-          setTextureUrl2('../src/assets/members/NULL.png')
+          setTextureUrl1('/src/assets/members/NULL.png')
+          setTextureUrl2('/src/assets/members/NULL.png')
           break
         case 'TechTeam':
           newPosition1.y = 0.3
@@ -114,8 +112,8 @@ const ImagePlane = ({ textContent }) => {
           newRotation2.x = -Math.PI /8
           newRotation2.y = -Math.PI /6
 
-          setTextureUrl1('../src/assets/members/LULWA.png')
-          setTextureUrl2('../src/assets/members/OREWA.png')
+          setTextureUrl1('/src/assets/members/LULWA.png')
+          setTextureUrl2('/src/assets/members/OREWA.png')
           break
       }
   // First Image

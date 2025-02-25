@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useMemo, useState } from "react";
 import { useGLTF, useDetectGPU } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import gsap from "gsap";
-import { metalness } from "three/tsl";
 import { isMobile } from "react-device-detect";
 
 const Model = ({ textContent, ...props }) => {
@@ -18,12 +17,12 @@ const Model = ({ textContent, ...props }) => {
   }, [GPUTier]);
 
   // Simplified model for low-end devices
-  const [modelPath, setModelPath] = useState('src/assets/3d/untitled.glb');
+  const [modelPath, setModelPath] = useState('/src/assets/3d/untitled.glb');
   useEffect(() => {
     // If low-end device detected, use a lower poly model if available
     if (isLowEndDevice || isMobile) {
       // Ideally you would have a low-poly version at this path
-      setModelPath('src/assets/3d/untitled_lowpoly.glb');
+      setModelPath('/src/assets/3d/untitled_lowpoly.glb');
     }
   }, [isLowEndDevice]);
 
@@ -107,8 +106,8 @@ const Model = ({ textContent, ...props }) => {
 };
 
 // Preload both high and low resolution models
-useGLTF.preload('src/assets/3d/untitled.glb');
+useGLTF.preload('/src/assets/3d/untitled.glb');
 // Uncomment if you have a low-poly version
-useGLTF.preload('src/assets/3d/untitled_lowpoly.glb');
+useGLTF.preload('/src/assets/3d/untitled_lowpoly.glb');
 
 export default React.memo(Model);
