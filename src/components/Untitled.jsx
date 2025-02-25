@@ -17,7 +17,7 @@ const Model = ({ textContent, ...props }) => {
   }, [GPUTier]);
 
   // Simplified model for low-end devices
-  const [modelPath, setModelPath] = useState('/src/assets/3d/untitled.glb');
+  const [modelPath, setModelPath] = useState('/3d/untitled.glb');
   useEffect(() => {
     // If low-end device detected, use a lower poly model if available
     if (isLowEndDevice || isMobile) {
