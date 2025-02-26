@@ -153,7 +153,7 @@ const Registration = ({ eventId, feesEvent }) => {
     return (
       <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat max-lg:overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
-        <div className='registration w-fit h-full max-lg:h-[150vh] backdrop-blur-sm p-5 overflow-y-scroll items-center'>
+        <div className='registration w-fit h-full max-lg:h-[150vh] backdrop-blur-sm p-5 max-lg:overflow-y-scroll items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
         <form onSubmit={handleSubmit} className="space-y-4 py-10">
           {/* Main Registrant Fields */}
