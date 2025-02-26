@@ -193,7 +193,7 @@ const Registration = ({ eventId, feesEvent }) => {
                 />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Branch</label>
+              <label className="block text-sm font-medium mb-1">Branch & Division</label>
               <input
                 type="text"
                 name="branch"
