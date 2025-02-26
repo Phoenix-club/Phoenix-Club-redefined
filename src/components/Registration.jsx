@@ -137,7 +137,7 @@ const Registration = ({ eventId, feesEvent }) => {
   // ✅ If registration is successful, show confirmation message
   if (registrationSuccess) {
     return (
-      <div className="h-screen max-lg:h-[150vh] font-pixelSans max-lg:overflow-y-scroll w-screen flex flex-col items-center justify-center bg-[#F3BD9F] text-[#0F1F25]">
+      <div className="min-h-screen max-lg:h-[150vh] font-pixelSans max-lg:overflow-y-scroll w-screen flex flex-col items-center justify-center bg-[#F3BD9F] text-[#0F1F25]">
         <h1 className="text-4xl font-bold">Registration Successful!</h1>
         <p className="text-lg mt-2">You will soon receive your confirmation mail</p>
         <p className="text-lg mt-2">You will be redirected to home in a few seconds...</p>
