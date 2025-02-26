@@ -151,9 +151,9 @@ const Registration = ({ eventId, feesEvent }) => {
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
-      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center min-h-screen bg-bottom bg-cover max-lg:h-[150vh] bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
+      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center min-h-screen bg-bottom bg-cover max-lg:h-[150vh] bg-no-repeat max-lg:overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
-        <div className='w-fit h-full justify-self-center backdrop-blur-sm p-5 items-center'>
+        <div className='w-fit h-full justify-self-center backdrop-blur-sm p-5 items-center overflow-y-scroll'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
         <form onSubmit={handleSubmit} className="space-y-4 py-10">
           {/* Main Registrant Fields */}
