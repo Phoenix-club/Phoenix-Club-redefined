@@ -269,7 +269,7 @@ const Registration = ({ eventId }) => {
             <button
               type="button"
               onClick={addTeamMember}
-              className="mt-2 rounded p-1 border bg-backG/50  bg-[#D3D3D3] hover:text-[#000]/70"
+              className="mt-2 rounded p-1 border bg-backG/50  bg-[#D3D3D3] text-[#fff] hover:text-[#000]/70"
               >
               + Add Team Member
             </button>
