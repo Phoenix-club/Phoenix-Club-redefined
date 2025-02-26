@@ -296,9 +296,10 @@ const Registration = ({ eventId, feesEvent }) => {
         </form>
     </div>
    { 
-    eventData.name == "prompt quest" ? 
-      <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 max-lg:border-none max-lg:pb-20 max-lg:h-1/3 border-[#FFF8DC] h-1/2' src="/ss50.jpeg" alt="" />
-      : 
+    eventData.name === "Prompt Quest" &&
+      <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 max-lg:border-none max-lg:pb-20 max-lg:h-1/3 border-[#FFF8DC] h-1/2' src="/ss50.jpeg" alt="" />}
+    {
+    eventData.name === "Imposter Escape" &&
       <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 max-lg:border-none max-lg:pb-20 max-lg:h-1/3 border-[#FFF8DC] h-1/2' src="/ss150.jpeg" alt="" />
     }
         {/* <NavLink
