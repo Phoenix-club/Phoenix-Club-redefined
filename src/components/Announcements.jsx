@@ -64,7 +64,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
   return (
     <div
       ref={containerRef}
-      className='w-full h-screen flex absolute justify-between items-start select-none overflow-hidden bg-[#17141C]'
+      className='w-full h-screen relative flex justify-between items-start select-none overflow-hidden bg-[#17141C]'
       style={{ willChange: "transform" }} // Enable GPU acceleration
     >
       <h1 className='text-[#FDE37D] absolute right-10 top-12 max-lg:top-1 text-7xl max-lg:text-4xl font-pixelSans font-extrabold z-10'>
@@ -108,7 +108,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
       </section>
 
       {/* Dashboard Titles */}
-      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 max-lg:p-5 absolute right-5 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
+      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 max-lg:p-5 absolute right-5 max-lg:right-0 top-64 max-lg:top-[60%] text-4xl max-lg:text-xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit max-lg:top-[70%] w-fit -translate-x-8 `} `}>
       {Array.isArray(events) && events.length > 0 ? (
   events.map((event, index) => (
           <h1
