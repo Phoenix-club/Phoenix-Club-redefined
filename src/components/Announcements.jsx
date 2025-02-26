@@ -76,10 +76,10 @@ const Announcements = ({ setEventId }) => {
           <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
             <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
-              <p className='text-xl max-md:text-lg max-md:w-full w-1/2'>{currentEvent.description}</p>
-              <p className='text-lg pl-5'>Fees: ₹{currentEvent.fees}</p>
-              <p className='text-lg pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
-              <p className='text-lg pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
+              <p className='text-lg overflow-y-scroll z-50 max-md:text-lg max-md:w-full w-1/2'>{currentEvent.description}</p>
+              <p className='text-lg max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
+              <p className='text-lg max-md:text-sm pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
+              <p className='text-lg max-md:text-sm pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate  ? 
                 <Link onClick={()=> setEventId(currentEvent.id)} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
