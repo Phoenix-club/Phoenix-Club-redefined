@@ -307,7 +307,7 @@ const Registration = ({ eventId }) => {
           </button>
         </form>
     </div>
-    <img className='w-1/2 h-1/2' src="/ss.jpeg" alt="" />
+    <img className='rounded-lg border-2 border-[#FFF8DC] h-1/3' src="/ss.jpeg" alt="" />
         <NavLink
           to='/'
           className='text-[#F6CAB6] group absolute z-50 max-lg:bottom-5 max-lg:left-5 bottom-10 left-10 text-5xl max-md:text-3xl bg-[#182225] rounded-lg font-pixelSans'
