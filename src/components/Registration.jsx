@@ -17,27 +17,38 @@ const Registration = ({ eventId }) => {
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(() => {
+    // First try to use data from location state
     if (location.state?.data) {
-      // Explicitly ensure paid is properly typed
-      const data = {
-        ...location.state.data,
-      };
-      setEventData(data);
-      // Fetch event data if not provided via state
-      client.get(`/events/`)
-        .then(response => {
-          const data = {
-            ...response.data[eventId],
-          };
-          setEventData({name:data[eventId].name, event_type:data[eventId].event_type, value:data[eventId].id});
-          setFeesEvent(data[eventId].fees)
-          console.log("Event data from API:", data[eventId], feesEvent);
-        })
-        .catch(error => {
-          console.error("Failed to fetch event data:", error);
-        });
+      setEventData({
+        ...location.state.data
+      });
+      setFeesEvent(location.state.data.fees || 0);
+      console.log("Event data from state:", location.state.data);
     }
-  }, [location.state, eventId]);
+    
+    // Always fetch fresh data from API regardless of location state
+    client.get(`/events/`)
+      .then(response => {
+        // Find the event with the matching ID
+        const eventIndex = response.data.findIndex(event => event.id == eventId);
+        
+        if (eventIndex !== -1) {
+          const event = response.data[eventIndex];
+          setEventData({
+            name: event.name, 
+            event_type: event.event_type, 
+            value: event.id
+          });
+          setFeesEvent(event.fees || 0);
+          console.log("Event data from API:", event, "Fees:", event.fees);
+        } else {
+          console.error("Event not found with ID:", eventId);
+        }
+      })
+      .catch(error => {
+        console.error("Failed to fetch event data:", error);
+      });
+  }, [eventId]); // Remove location.state from dependencies to prevent double fetching
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
