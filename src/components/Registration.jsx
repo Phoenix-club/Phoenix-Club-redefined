@@ -296,7 +296,7 @@ const Registration = ({ eventId, feesEvent }) => {
         </form>
     </div>
     <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 max-lg:h-1/3 border-[#FFF8DC] h-1/2' src="/ss.jpeg" alt="" />
-        <NavLink
+        {/* <NavLink
           to='/'
           className='text-[#F6CAB6] group absolute z-50 max-lg:bottom-5 max-lg:left-5 bottom-10 left-10 text-5xl max-md:text-3xl bg-[#182225] rounded-lg font-pixelSans'
           >
@@ -309,7 +309,7 @@ const Registration = ({ eventId, feesEvent }) => {
               />
             Home
           </span>
-        </NavLink>
+        </NavLink> */}
       </div>
       
     );}
@@ -318,7 +318,7 @@ const Registration = ({ eventId, feesEvent }) => {
           <h1 className='text-3xl font-pixelSans'>
               Invalid Event
           </h1>
-          {/* <NavLink
+          <NavLink
           to='/'
           className='text-[#F6CAB6] group absolute z-50 bottom-10 left-10 text-5xl max-md:text-3xl font-pixelSans'
         >
@@ -331,7 +331,7 @@ const Registration = ({ eventId, feesEvent }) => {
             />
             Home
           </span>
-        </NavLink> */}
+        </NavLink>
         </div>);
   }
 };
