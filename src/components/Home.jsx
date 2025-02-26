@@ -15,7 +15,9 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const [image, setImage] = useState('/car.gif')
   const [eventId, setEventId] = useState(null)
-  const [event_type, setEvent_type] = useState("")
+  const [event_type, setEvent_type] = useState(() => {
+    return JSON.parse(localStorage.getItem("event_type")) || "";
+  })
   const [feesEvent, setFeesEvent] = useState(() => {
     return JSON.parse(localStorage.getItem("feesEvent")) || 0;
   });
@@ -30,7 +32,8 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.setItem("feesEvent", JSON.stringify(feesEvent));
-  }, [feesEvent]);
+    localStorage.setItem("event_type", JSON.stringify(event_type));
+  }, [feesEvent,event_type]);
 
 
   useEffect(()=>{
