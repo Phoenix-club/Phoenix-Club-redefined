@@ -72,7 +72,7 @@ const Announcements = ({ setEventId }) => {
       </h1>
 
       {/* Dashboard */}
-      <section className='w-full h-full flex flex-col justify-between items-center p-10 max-lg:p-5'>
+      <section className='w-full h-full flex flex-col justify-between items-center p-5'>
         <section className='w-full h-fit flex flex-col overflow-visible pt-5 z-10'>
           <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
             <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
