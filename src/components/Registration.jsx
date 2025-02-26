@@ -45,7 +45,7 @@ const Registration = ({ eventId, feesEvent }) => {
       .catch(error => {
         console.error("Failed to fetch event data:", error);
       });
-  }, [eventId]); // Remove location.state from dependencies to prevent double fetching
+  }, [eventId, eventData]); // Remove location.state from dependencies to prevent double fetching
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
@@ -285,7 +285,7 @@ const Registration = ({ eventId, feesEvent }) => {
               + Add Team Member
             </button>
           </div>
-  }
+        }
           {/* Submit Button */}
           <button
             type="submit"
