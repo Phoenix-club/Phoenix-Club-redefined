@@ -64,7 +64,7 @@ const Announcements = ({ setEventId }) => {
   return (
     <div
       ref={containerRef}
-      className='w-full h-full flex absolute justify-between items-start select-none overflow-y-scroll overflow-x-hidden bg-[#17141C]'
+      className='w-full h-full flex absolute justify-between items-start select-none overflow-hidden bg-[#17141C]'
       style={{ willChange: "transform" }} // Enable GPU acceleration
     >
       <h1 className='text-[#FDE37D] absolute right-10 top-12 max-lg:top-1 text-7xl max-lg:text-4xl font-pixelSans font-extrabold z-10'>
