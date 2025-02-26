@@ -22,8 +22,16 @@ const Registration = ({ eventId }) => {
       setEventData({
         ...location.state.data
       });
-      setFeesEvent(location.state.data.fees || 0);
+      const stateFees = location.state.data.fees || 0;
+      setFeesEvent(stateFees);
+      localStorage.setItem('eventFees', stateFees);
       console.log("Event data from state:", location.state.data);
+    } else {
+      // If no location state, try to get from localStorage
+      const savedFees = localStorage.getItem('eventFees');
+      if (savedFees) {
+        setFeesEvent(parseInt(savedFees));
+      }
     }
     
     // Always fetch fresh data from API regardless of location state
@@ -39,17 +47,13 @@ const Registration = ({ eventId }) => {
             event_type: event.event_type, 
             value: event.id
           });
-          // In your useEffect when setting feesEvent
-        if (event.fees) {
-          setFeesEvent(event.fees);
-          localStorage.setItem('eventFees', event.fees);
-        }
-
-// Then initialize feesEvent with localStorage value if available
-          setFeesEvent(() => {
-            const savedFees = localStorage.getItem('eventFees');
-            return savedFees ? parseInt(savedFees) : 0;
-          });
+          
+          // Set fees and store in localStorage
+          if (event.fees !== undefined) {
+            setFeesEvent(event.fees);
+            localStorage.setItem('eventFees', event.fees);
+            console.log("Fees set from API:", event.fees);
+          }
         } else {
           console.error("Event not found with ID:", eventId);
         }
@@ -57,7 +61,12 @@ const Registration = ({ eventId }) => {
       .catch(error => {
         console.error("Failed to fetch event data:", error);
       });
-  }, [eventId]); // Remove location.state from dependencies to prevent double fetching
+  }, [eventId]);
+  
+  // Fix the addTeamMember function
+  // const addTeamMember = () => {
+
+  // }; // Remove location.state from dependencies to prevent double fetching
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
@@ -90,7 +99,9 @@ const Registration = ({ eventId }) => {
     setFormData({
       ...formData,
       team_members: [...formData.team_members, { name: '', email: '', phone: '' }]
-    });<div>
+    });
+    
+    <div>
     <label className="block text-sm font-medium mb-1">Team Name</label>
     <input
       type="text"
