@@ -215,7 +215,7 @@ const Registration = ({ eventId }) => {
   
           {/* Payment Screenshot Upload */}
           {( feesEvent > 0) && <div className="mt-4">
-            <label className="block text-sm font-medium mb-1">Payment Screenshot</label>
+            <label className="block text-sm font-medium mb-1">Payment Screenshot <p className='text-[0.5rem]'>(warning: image should be under 2MB and transaction ID should be visible)</p></label>
             <input
               type="file"
               onChange={handleFileChange}
