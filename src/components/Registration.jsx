@@ -206,7 +206,7 @@ const Registration = ({ eventId }) => {
           </div>
   
           {/* Payment Screenshot Upload */}
-          {( eventData.paid === true || eventData.fees > 0) && <div className="mt-4">
+          {( eventData.fees > 0) && <div className="mt-4">
             <label className="block text-sm font-medium mb-1">Payment Screenshot</label>
             <input
               type="file"
