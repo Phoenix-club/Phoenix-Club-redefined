@@ -27,7 +27,6 @@ const Announcements = ({ setEventId }) => {
   const fetchData = async () => {
     const response = await client.get('/events');
     setEvents(response.data)
-    console.log(response.data)
     if (response.data.length > 0) {
       setCurrentEvent(response.data[0])
     }

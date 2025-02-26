@@ -23,6 +23,8 @@ const Registration = ({ eventId }) => {
         paid: Boolean(location.state.data.paid)
       };
       setEventData(data);
+      console.log("Event data from state:", data);
+    } else if (eventId) {
       // Fetch event data if not provided via state
       client.get(`/events/${eventId}/`)
         .then(response => {
