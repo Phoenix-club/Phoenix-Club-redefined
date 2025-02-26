@@ -97,7 +97,7 @@ const Announcements = ({ setEventId }) => {
           </div>
         </section>
         {!isMobile && (
-          <section className='flex items-end justify-end mt-5 h-1/2 w-1/3 z-10'>
+          <section className='flex items-end justify-end mb-5 h-1/2 w-1/3 z-10'>
             <img
               className='h-[80%] object-cover p-5 border-r-4 border-b-4 border-[#fff]'
               src={currentEvent.poster}
