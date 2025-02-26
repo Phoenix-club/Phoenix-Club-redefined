@@ -23,8 +23,6 @@ const Registration = ({ eventId }) => {
         paid: Boolean(location.state.data.paid)
       };
       setEventData(data);
-      console.log("Event data from state:", data);
-    } else if (eventId) {
       // Fetch event data if not provided via state
       client.get(`/events/`)
         .then(response => {
@@ -32,8 +30,8 @@ const Registration = ({ eventId }) => {
             ...response.data[eventId],
             paid: Boolean(response.data[eventId].paid)
           };
-          setEventData(data);
-          console.log("Event data from API:", data);
+          setEventData({name:data[eventId].name, event_type:data[eventId].event_type, value:data[eventId].id});
+          console.log("Event data from API:", data[eventId]);
         })
         .catch(error => {
           console.error("Failed to fetch event data:", error);
