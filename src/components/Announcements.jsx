@@ -77,7 +77,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
           <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
             <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
-              <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-lg max-md:w-full w-1/2'>{currentEvent.description}</p>
+              <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2'>{currentEvent.description}</p>
               <p className='text-lg max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
               <p className='text-lg max-md:text-sm pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
               <p className='text-lg max-md:text-sm pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
@@ -108,7 +108,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
       </section>
 
       {/* Dashboard Titles */}
-      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 absolute right-5 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-2xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
+      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 max-lg:p-5 absolute right-5 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
       {Array.isArray(events) && events.length > 0 ? (
   events.map((event, index) => (
           <h1
