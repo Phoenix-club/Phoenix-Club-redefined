@@ -208,7 +208,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
                 />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Year</label>
+              <label className="block text-sm font-medium mb-1">Year & College</label>
               <input
                 type="text"
                 name="year"
