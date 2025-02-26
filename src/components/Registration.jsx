@@ -14,7 +14,7 @@ const Registration = ({ eventId }) => {
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
-  const [eventData, setEventData] = useState({ name: "", event_type: "", value: false });
+  const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(() => {
     if (location.state?.data) {
       // Explicitly ensure paid is properly typed
@@ -23,8 +23,6 @@ const Registration = ({ eventId }) => {
         paid: Boolean(location.state.data.paid)
       };
       setEventData(data);
-      console.log("Event data from state:", data);
-    } else if (eventId) {
       // Fetch event data if not provided via state
       client.get(`/events/${eventId}/`)
         .then(response => {
