@@ -12,6 +12,7 @@ const Registration = ({ eventId }) => {
 
 
   const navigate = useNavigate(); // Used for redirection
+  const [feesEvent, setFeesEvent] = useState(0)
   const location = useLocation();
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
@@ -38,7 +39,17 @@ const Registration = ({ eventId }) => {
             event_type: event.event_type, 
             value: event.id
           });
-          setFeesEvent(event.fees || 0);
+          // In your useEffect when setting feesEvent
+        if (event.fees) {
+          setFeesEvent(event.fees);
+          localStorage.setItem('eventFees', event.fees);
+        }
+
+// Then initialize feesEvent with localStorage value if available
+          setFeesEvent(() => {
+            const savedFees = localStorage.getItem('eventFees');
+            return savedFees ? parseInt(savedFees) : 0;
+          });
         } else {
           console.error("Event not found with ID:", eventId);
         }
@@ -134,16 +145,6 @@ const Registration = ({ eventId }) => {
     }
   };
 
-  if (eventData.fees) {
-    setFeesEvent(eventData.fees);
-    localStorage.setItem('eventFees', eventData.fees);
-  }
-
-  // Then initialize feesEvent with localStorage value if available
-  const [feesEvent, setFeesEvent] = useState(() => {
-    const savedFees = localStorage.getItem('eventFees');
-    return savedFees ? parseInt(savedFees) : 0;
-  });
 
   // ✅ If registration is successful, show confirmation message
   if (registrationSuccess) {
