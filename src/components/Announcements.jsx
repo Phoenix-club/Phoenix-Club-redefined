@@ -78,7 +78,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
             <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
               <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2'>{currentEvent.description}</p>
-              <p className='text-lg max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
+              <p className='text-lg font-sans max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
               <p className='text-lg max-md:text-sm pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
               <p className='text-lg max-md:text-sm pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
               <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
