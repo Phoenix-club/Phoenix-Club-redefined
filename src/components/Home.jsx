@@ -29,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.setItem("feesEvent", JSON.stringify(feesEvent));
-  }, [count]);
+  }, [feesEvent]);
 
 
   useEffect(()=>{
