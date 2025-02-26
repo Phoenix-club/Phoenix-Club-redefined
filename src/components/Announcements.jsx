@@ -57,6 +57,19 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
     return () => ctx.revert();
   }, []);
 
+  const formatDateToIST = (dateStr) => {
+    return new Date(dateStr).toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+  };
+  
+
   const handleEventClick = useCallback((event) => {
     setCurrentEvent(event)
   }, []);
@@ -79,8 +92,8 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
               <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2'>{currentEvent.description}</p>
               <p className='text-lg font-sans max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
-              <p className='text-lg max-md:text-sm pl-5'>Date: {new Date(currentEvent.date).toLocaleString('en-GB')}</p>
-              <p className='text-lg max-md:text-sm pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString('en-GB')}</p>
+              <p className='text-lg max-md:text-sm pl-5'>Date: {formatDateToIST(currentEvent.date)}</p>
+              <p className='text-lg max-md:text-sm pl-5'>Deadline: {formatDateToIST(currentEvent.deadline)}</p>
               <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate  ? 
