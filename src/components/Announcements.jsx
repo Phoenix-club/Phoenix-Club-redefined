@@ -106,7 +106,7 @@ const Announcements = ({ setEventId }) => {
       </section>
 
       {/* Dashboard Titles */}
-      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 absolute right-4 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-2xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
+      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 absolute right-5 max-lg:right-0 top-64 max-md:top-[60%] text-4xl max-lg:text-2xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit w-fit -translate-x-8 `} `}>
       {Array.isArray(events) && events.length > 0 ? (
   events.map((event, index) => (
           <h1
