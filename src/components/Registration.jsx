@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 const Registration = ({ eventId, feesEvent }) => {
   const client = axios.create({
@@ -9,7 +10,7 @@ const Registration = ({ eventId, feesEvent }) => {
       'ngrok-skip-browser-warning': 'true' 
     }
   });
-
+  isMobile && (document.body.style.overflowY = "scroll")
 
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
@@ -150,7 +151,7 @@ const Registration = ({ eventId, feesEvent }) => {
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
-      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen max-lg:h-full bg-bottom bg-cover bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
+      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
         <div className='w-fit h-full justify-self-center backdrop-blur-sm p-5 items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
