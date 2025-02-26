@@ -13,6 +13,7 @@ const Registration = ({ eventId }) => {
 
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
+  const [feesEvent, setFeesEvent] = useState(0)
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(() => {
@@ -20,7 +21,6 @@ const Registration = ({ eventId }) => {
       // Explicitly ensure paid is properly typed
       const data = {
         ...location.state.data,
-        paid: Boolean(location.state.data.paid)
       };
       setEventData(data);
       // Fetch event data if not provided via state
@@ -28,10 +28,10 @@ const Registration = ({ eventId }) => {
         .then(response => {
           const data = {
             ...response.data[eventId],
-            paid: Boolean(response.data[eventId].paid)
           };
           setEventData({name:data[eventId].name, event_type:data[eventId].event_type, value:data[eventId].id});
-          console.log("Event data from API:", data[eventId]);
+          setFeesEvent(data[eventId].fees)
+          console.log("Event data from API:", data[eventId], feesEvent);
         })
         .catch(error => {
           console.error("Failed to fetch event data:", error);
@@ -204,7 +204,7 @@ const Registration = ({ eventId }) => {
           </div>
   
           {/* Payment Screenshot Upload */}
-          {( eventData.fees > 0) && <div className="mt-4">
+          {( feesEvent > 0) && <div className="mt-4">
             <label className="block text-sm font-medium mb-1">Payment Screenshot</label>
             <input
               type="file"
