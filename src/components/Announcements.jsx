@@ -150,7 +150,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
       {/* Navigation */}
       <NavLink
         to='/'
-        className='text-[#F6CAB6] group absolute z-50 bottom-10 left-10 text-5xl max-md:text-3xl font-pixelSans'
+        className='text-[#F6CAB6] group absolute z-50 bottom-10 max-lg:bottom-24 left-10 text-5xl max-md:text-3xl font-pixelSans'
       >
         <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 max-md:px-1 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
           <img
