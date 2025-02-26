@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
-const Registration = ({ eventId,  }) => {
+const Registration = ({ eventId, feesEvent }) => {
   const client = axios.create({
     baseURL: "https://phoenixkkw.pythonanywhere.com/",
     headers:{
