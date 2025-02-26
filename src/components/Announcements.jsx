@@ -72,7 +72,7 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
 
   const handleEventClick = useCallback((event) => {
     setCurrentEvent(event)
-    console.log(currentEvent.date)
+    console.log(String(currentEvent.date))
   }, []);
 
   return (
@@ -93,8 +93,8 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
               <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2'>{currentEvent.description}</p>
               <p className='text-lg font-sans max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
-              <p className='text-lg max-md:text-sm pl-5'>Date: {formatDateToIST(currentEvent.date)}</p>
-              <p className='text-lg max-md:text-sm pl-5'>Deadline: {formatDateToIST(currentEvent.deadline)}</p>
+              <p className='text-lg font-sans max-md:text-sm pl-5'>Date: {formatDateToIST(currentEvent.date)}</p>
+              <p className='text-lg font-sans max-md:text-sm pl-5'>Deadline: {formatDateToIST(currentEvent.deadline)}</p>
               <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate  ? 
