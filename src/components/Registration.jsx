@@ -15,11 +15,31 @@ const Registration = ({ eventId }) => {
   const location = useLocation();
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
-  useEffect(()=>{
-    if(location.state?.data){
-      setEventData({ ...location.state.data});
-    } 
-  },[location.state])
+  useEffect(() => {
+    if (location.state?.data) {
+      // Explicitly ensure paid is properly typed
+      const data = {
+        ...location.state.data,
+        paid: Boolean(location.state.data.paid)
+      };
+      setEventData(data);
+      console.log("Event data from state:", data);
+    } else if (eventId) {
+      // Fetch event data if not provided via state
+      client.get(`/events/${eventId}/`)
+        .then(response => {
+          const data = {
+            ...response.data,
+            paid: Boolean(response.data.paid)
+          };
+          setEventData(data);
+          console.log("Event data from API:", data);
+        })
+        .catch(error => {
+          console.error("Failed to fetch event data:", error);
+        });
+    }
+  }, [location.state, eventId]);
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
