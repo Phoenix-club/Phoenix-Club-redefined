@@ -45,7 +45,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       .catch(error => {
         // console.error("Failed to fetch event data:", error);
       });
-  }, [eventId, eventData]); // Remove location.state from dependencies to prevent double fetching
+  }, [eventId]); // Remove location.state from dependencies to prevent double fetching
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
