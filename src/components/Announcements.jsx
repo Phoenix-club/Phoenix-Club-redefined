@@ -72,7 +72,7 @@ const Announcements = ({ setEventId }) => {
       </h1>
 
       {/* Dashboard */}
-      <section className='w-full h-full flex flex-col justify-start items-center p-5 max-lg:p-5'>
+      <section className='w-full h-full flex flex-col justify-between items-center p-5 max-lg:p-5'>
         <section className='w-full h-fit flex flex-col overflow-visible pt-5 z-10'>
           <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
             <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
@@ -97,7 +97,7 @@ const Announcements = ({ setEventId }) => {
           </div>
         </section>
         {!isMobile && (
-          <section className='flex items-end justify-end h-1/2 w-1/3 z-10'>
+          <section className='flex items-end justify-end mt-5 h-1/2 w-1/3 z-10'>
             <img
               className='h-[80%] object-cover p-5 border-r-4 border-b-4 border-[#fff]'
               src={currentEvent.poster}
