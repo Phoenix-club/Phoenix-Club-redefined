@@ -153,7 +153,7 @@ const Registration = ({ eventId, feesEvent }) => {
     return (
       <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat max-lg:overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
-        <div className='w-fit h-full max-lg:h-[150vh] backdrop-blur-sm p-5 overflow-y-scroll items-center'>
+        <div className='registration w-fit h-full max-lg:h-[150vh] backdrop-blur-sm p-5 overflow-y-scroll items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
         <form onSubmit={handleSubmit} className="space-y-4 py-10">
           {/* Main Registrant Fields */}
@@ -295,7 +295,7 @@ const Registration = ({ eventId, feesEvent }) => {
           </button>
         </form>
     </div>
-    <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 max-lg:border-none max-lg:pb-20 max-lg:h-1/3 border-[#FFF8DC] h-1/2' src="/ss.jpeg" alt="" />
+    <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 max-lg:border-none max-lg:pb-20 max-lg:h-1/3 border-[#FFF8DC] h-1/2' src={ eventData.name == "prompt quest" ?`/ss50.jpeg`: `/ss150.jpeg`} alt="" />
         {/* <NavLink
           to='/'
           className='text-[#F6CAB6] group absolute z-50 max-lg:bottom-5 max-lg:left-5 bottom-10 left-10 text-5xl max-md:text-3xl bg-[#182225] rounded-lg font-pixelSans'
