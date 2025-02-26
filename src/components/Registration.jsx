@@ -80,7 +80,16 @@ const Registration = ({ eventId }) => {
     setFormData({
       ...formData,
       team_members: [...formData.team_members, { name: '', email: '', phone: '' }]
-    });
+    });<div>
+    <label className="block text-sm font-medium mb-1">Team Name</label>
+    <input
+      type="text"
+      name="team_name"
+      value={formData.team_name}
+      onChange={handleInputChange}
+      className="w-full p-2 bg-backG/50 border rounded "
+      />
+  </div>
   };
 
   const removeTeamMember = (index) => {
@@ -201,7 +210,7 @@ const Registration = ({ eventId }) => {
                 className="w-full p-2 bg-backG/50 border rounded "
                 />
             </div>
-            <div>
+            { eventData.event_type == "team" && <div>
               <label className="block text-sm font-medium mb-1">Team Name</label>
               <input
                 type="text"
@@ -210,12 +219,12 @@ const Registration = ({ eventId }) => {
                 onChange={handleInputChange}
                 className="w-full p-2 bg-backG/50 border rounded "
                 />
-            </div>
+            </div>}
           </div>
   
           {/* Payment Screenshot Upload */}
           {( feesEvent > 0) && <div className="mt-4">
-            <label className="block text-sm font-medium mb-1">Payment Screenshot <p className='text-[0.5rem]'>(warning: image should be under 2MB and transaction ID should be visible)</p></label>
+            <label className="block text-sm font-medium mb-1">Payment Screenshot <p>(warning: image should be under 2MB and transaction ID should be visible)</p></label>
             <input
               type="file"
               onChange={handleFileChange}
