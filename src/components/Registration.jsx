@@ -40,7 +40,6 @@ const Registration = ({ eventId }) => {
             value: event.id
           });
           setFeesEvent(event.fees || 0);
-          console.log("Event data from API:", event, "Fees:", event.fees);
         } else {
           console.error("Event not found with ID:", eventId);
         }
