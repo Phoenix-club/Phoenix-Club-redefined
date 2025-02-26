@@ -74,7 +74,7 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
       {/* Dashboard */}
       <section className='w-full h-full flex flex-col justify-between items-center p-5 max-lg:p-5'>
         <section className='w-full h-fit flex flex-col overflow-visible pt-5 z-10'>
-          <div className='w-full h-fit gap-5 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
+          <div className='w-full h-fit gap-5 max-lg:gap-2 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
             <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
               <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2'>{currentEvent.description}</p>
