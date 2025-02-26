@@ -277,13 +277,13 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
                 )}
               </div>
             ))}
-            <button
+            {formData.team_members.length() <= 3 && <button
               type="button"
               onClick={addTeamMember}
               className="mt-2 rounded p-1 border bg-backG/50  bg-[#D3D3D3] text-[#fff] hover:text-[#000]/70"
               >
               + Add Team Member
-            </button>
+            </button>}
           </div>
         }
           {/* Submit Button */}
