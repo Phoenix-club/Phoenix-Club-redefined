@@ -8,7 +8,7 @@ import { Link, NavLink } from 'react-router-dom'
 const Announcements = ({ setEventId,setFeesEvent }) => {
   const containerRef = useRef(null)
   const currentDate = new Date();
-  document.body.style.overflowY = "hidden";
+  isMobile ? documentdocument.body.style.overflowY = "scroll": document.body.style.overflowY = "hidden";
   const [events, setEvents] = useState([]) // Store all events
   const [currentEvent, setCurrentEvent] = useState({}) // Store the current event
   const client = axios.create({
