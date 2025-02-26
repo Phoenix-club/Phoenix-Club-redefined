@@ -235,7 +235,7 @@ const Registration = ({ eventId }) => {
                     placeholder="Name"
                     value={member.name}
                     onChange={(e) => handleTeamMemberChange(index, 'name', e.target.value)}
-                    className="p-2 border bg-backG/50 rounded text-[#000]"
+                    className="p-2 border bg-backG/50 rounded"
                     required
                     />
                   <input
@@ -243,7 +243,7 @@ const Registration = ({ eventId }) => {
                     placeholder="Email"
                     value={member.email}
                     onChange={(e) => handleTeamMemberChange(index, 'email', e.target.value)}
-                    className="p-2 border bg-backG/50 rounded text-[#000]"
+                    className="p-2 border bg-backG/50 rounded"
                     required
                     />
                   <input
@@ -251,7 +251,7 @@ const Registration = ({ eventId }) => {
                     placeholder="Phone"
                     value={member.phone}
                     onChange={(e) => handleTeamMemberChange(index, 'phone', e.target.value)}
-                    className="p-2 border bg-backG/50 rounded text-[#000]"
+                    className="p-2 border bg-backG/50 rounded "
                     pattern="[0-9]{10}"
                     />
                 </div>
@@ -259,7 +259,7 @@ const Registration = ({ eventId }) => {
                   <button
                   type="button"
                   onClick={() => removeTeamMember(index)}
-                  className="mt-2 text-sm p-3 hover:text-[#A95B49] text-[#000]"
+                  className="mt-2 text-sm p-3 hover:text-[#A95B49] "
                   >
                     Remove Member
                   </button>
