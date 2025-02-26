@@ -81,6 +81,7 @@ const Announcements = ({ setEventId }) => {
               <p className='text-lg max-md:text-sm pl-5'>Fees: ₹{currentEvent.fees}</p>
               <p className='text-lg max-md:text-sm pl-5'>Date: {new Date(currentEvent.date).toLocaleString()}</p>
               <p className='text-lg max-md:text-sm pl-5'>Deadline: {new Date(currentEvent.deadline).toLocaleString()}</p>
+              <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate  ? 
                 <Link onClick={()=> setEventId(currentEvent.id)} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
