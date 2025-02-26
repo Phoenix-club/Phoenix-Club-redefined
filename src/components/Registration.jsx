@@ -26,11 +26,11 @@ const Registration = ({ eventId }) => {
       console.log("Event data from state:", data);
     } else if (eventId) {
       // Fetch event data if not provided via state
-      client.get(`/events/${eventId}/`)
+      client.get(`/events/`)
         .then(response => {
           const data = {
-            ...response.data,
-            paid: Boolean(response.data.paid)
+            ...response.data[eventId],
+            paid: Boolean(response.data[eventId].paid)
           };
           setEventData(data);
           console.log("Event data from API:", data);
