@@ -72,6 +72,7 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
 
   const handleEventClick = useCallback((event) => {
     setCurrentEvent(event)
+    console.log(currentEvent.date)
   }, []);
 
   return (
