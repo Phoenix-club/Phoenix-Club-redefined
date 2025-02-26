@@ -236,7 +236,7 @@ const Registration = ({ eventId, feesEvent }) => {
           </div>}
   
           {/* Team Members Section */}
-          { eventData.event_type=="team" && <div className="mt-6">
+          { eventData.event_type==="team" && <div className="mt-6">
             <h3 className="text-lg text-[#fff] font-semibold mb-3">Team Members</h3>
             {formData.team_members.map((member, index) => (
               <div key={index} className="mb-4 text-[#fff] p-4 border rounded">
