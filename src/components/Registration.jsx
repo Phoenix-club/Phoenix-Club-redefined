@@ -150,7 +150,7 @@ const Registration = ({ eventId, feesEvent }) => {
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
-      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-fit bg-bottom bg-cover bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
+      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
         <div className='w-fit h-full justify-self-center backdrop-blur-sm p-5 items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
@@ -294,7 +294,7 @@ const Registration = ({ eventId, feesEvent }) => {
           </button>
         </form>
     </div>
-    <img className='rounded-lg max-lg:p-0 p-5 border-2 border-[#FFF8DC] h-1/2' src="/ss.jpeg" alt="" />
+    <img className='rounded-lg justify-self-start max-lg:p-0 p-5 border-2 border-[#FFF8DC] h-1/2' src="/ss.jpeg" alt="" />
         <NavLink
           to='/'
           className='text-[#F6CAB6] group absolute z-50 max-lg:bottom-5 max-lg:left-5 bottom-10 left-10 text-5xl max-md:text-3xl bg-[#182225] rounded-lg font-pixelSans'
