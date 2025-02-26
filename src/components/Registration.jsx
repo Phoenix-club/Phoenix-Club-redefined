@@ -14,7 +14,7 @@ const Registration = ({ eventId }) => {
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
-  const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
+  const [eventData, setEventData] = useState({ name: "", event_type: "", value: false });
   useEffect(() => {
     if (location.state?.data) {
       // Explicitly ensure paid is properly typed
