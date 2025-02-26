@@ -114,7 +114,7 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
           <h1
             key={index}
             className="events border-[#FFF] hover:border-b-4 transition-all hover:px-5"
-            onClick={() => handleEventClick(event)}
+            onClick={(event) => handleEventClick(event)}
           >
             {event.name}
           </h1>
