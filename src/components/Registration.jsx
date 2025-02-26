@@ -10,6 +10,9 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       'ngrok-skip-browser-warning': 'true' 
     }
   });
+
+  const controller = new AbortController()
+
   isMobile && (document.body.style.overflowY = "scroll")
 
   const navigate = useNavigate(); // Used for redirection
@@ -25,7 +28,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
     }
     
     // Always fetch fresh data from API regardless of location state
-    client.get(`/events/`)
+    client.get(`/events/`,{signal: controller.signal})
       .then(response => {
         // Find the event with the matching ID
         const eventIndex = response.data.findIndex(event => event.id == eventId);
@@ -45,6 +48,8 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       .catch(error => {
         // console.error("Failed to fetch event data:", error);
       });
+
+      return()=> {controller.abort()};
   }, [eventId]); // Remove location.state from dependencies to prevent double fetching
   const [formData, setFormData] = useState({
     registrant: '',
