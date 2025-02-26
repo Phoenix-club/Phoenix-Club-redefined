@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
-const Registration = ({ eventId, feesEvent }) => {
+const Registration = ({ eventId, feesEvent, event_type }) => {
   const client = axios.create({
     baseURL: "https://phoenixkkw.pythonanywhere.com/",
     headers:{
@@ -236,7 +236,7 @@ const Registration = ({ eventId, feesEvent }) => {
           </div>}
   
           {/* Team Members Section */}
-          { eventData.event_type==="team"||eventData.event_type==="Team" && <div className="mt-6">
+          { (event_type==="team"||event_type==="Team") && <div className="mt-6">
             <h3 className="text-lg text-[#fff] font-semibold mb-3">Team Members</h3>
             {formData.team_members.map((member, index) => (
               <div key={index} className="mb-4 text-[#fff] p-4 border rounded">

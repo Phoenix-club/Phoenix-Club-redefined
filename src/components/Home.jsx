@@ -15,6 +15,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const [image, setImage] = useState('/car.gif')
   const [eventId, setEventId] = useState(null)
+  const [event_type, setEvent_type] = useState("")
   const [feesEvent, setFeesEvent] = useState(() => {
     return JSON.parse(localStorage.getItem("feesEvent")) || 0;
   });
@@ -72,8 +73,8 @@ const Home = () => {
 
         <Routes location={location}>
           <Route index path='/' element={<HeroSection />} />
-          <Route path='/announcements' element={<Announcements setFeesEvent={setFeesEvent} setEventId={setEventId} />} />
-          <Route path='/register' element={<Registration feesEvent={feesEvent} eventId={eventId} />} />
+          <Route path='/announcements' element={<Announcements setEvent_type={setEvent_type} setFeesEvent={setFeesEvent} setEventId={setEventId} />} />
+          <Route path='/register' element={<Registration event_type={event_type} feesEvent={feesEvent} eventId={eventId} />} />
           <Route path='/members' element={<Members />}/>
           <Route path='/loader' element={<Loader />}/>
         </Routes>

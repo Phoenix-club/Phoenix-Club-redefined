@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link, NavLink } from 'react-router-dom'
 
-const Announcements = ({ setEventId,setFeesEvent }) => {
+const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
   const containerRef = useRef(null)
   const currentDate = new Date();
   isMobile && (document.body.style.overflowY = "hidden");
@@ -84,7 +84,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
               <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate  ? 
-                <Link onClick={()=> {setEventId(currentEvent.id); setFeesEvent(currentEvent.fees) }} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
+                <Link onClick={()=> {setEventId(currentEvent.id); setFeesEvent(currentEvent.fees); setEvent_type(currentEvent.event_type) }} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
                   <span className='group-hover:hover:border-[#1B9E64] p-1 transition-all rounded-xl group-hover:hover:border-2'>
                   Register Now
                   </span>
