@@ -13,7 +13,6 @@ const Registration = ({ eventId }) => {
 
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
-  const [feesEvent, setFeesEvent] = useState(0)
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(() => {
@@ -97,6 +96,9 @@ const Registration = ({ eventId }) => {
     setFormData({ ...formData, team_members: newMembers });
   }; 
 
+  // In your useEffect when setting feesEvent
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -131,6 +133,17 @@ const Registration = ({ eventId }) => {
       console.error('Registration failed:', error);
     }
   };
+
+  if (eventData.fees) {
+    setFeesEvent(eventData.fees);
+    localStorage.setItem('eventFees', eventData.fees);
+  }
+
+  // Then initialize feesEvent with localStorage value if available
+  const [feesEvent, setFeesEvent] = useState(() => {
+    const savedFees = localStorage.getItem('eventFees');
+    return savedFees ? parseInt(savedFees) : 0;
+  });
 
   // ✅ If registration is successful, show confirmation message
   if (registrationSuccess) {
