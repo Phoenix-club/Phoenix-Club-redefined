@@ -8,7 +8,7 @@ import { Link, NavLink } from 'react-router-dom'
 const Announcements = ({ setEventId,setFeesEvent }) => {
   const containerRef = useRef(null)
   const currentDate = new Date();
-  isMobile ? (documentdocument.body.style.overflowY = "scroll"): (document.body.style.overflowY = "hidden");
+  isMobile && (document.body.style.overflowY = "hidden");
   const [events, setEvents] = useState([]) // Store all events
   const [currentEvent, setCurrentEvent] = useState({}) // Store the current event
   const client = axios.create({
@@ -64,7 +64,7 @@ const Announcements = ({ setEventId,setFeesEvent }) => {
   return (
     <div
       ref={containerRef}
-      className='w-full h-screen relative flex justify-between items-start select-none overflow-hidden bg-[#17141C]'
+      className='w-full h-screen relative flex justify-between items-start select-none max-lg:overflow-y-scroll bg-[#17141C]'
       style={{ willChange: "transform" }} // Enable GPU acceleration
     >
       <h1 className='text-[#FDE37D] absolute right-10 top-12 max-lg:top-1 text-7xl max-lg:text-4xl font-pixelSans font-extrabold z-10'>
