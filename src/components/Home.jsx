@@ -15,6 +15,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const [image, setImage] = useState('/car.gif')
   const [eventId, setEventId] = useState(null)
+  const [feesEvent, setFeesEvent] = useState(0)
   const location = useLocation()
 
   useEffect(()=>{
@@ -65,8 +66,8 @@ const Home = () => {
 
         <Routes location={location}>
           <Route index path='/' element={<HeroSection />} />
-          <Route path='/announcements' element={<Announcements setEventId={setEventId} />} />
-          <Route path='/register' element={<Registration eventId={eventId} />} />
+          <Route path='/announcements' element={<Announcements setFeesEvent={setFeesEvent} setEventId={setEventId} />} />
+          <Route path='/register' element={<Registration feesEvent={feesEvent} eventId={eventId} />} />
           <Route path='/members' element={<Members />}/>
           <Route path='/loader' element={<Loader />}/>
         </Routes>

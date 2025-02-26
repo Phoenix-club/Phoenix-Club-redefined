@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link, NavLink } from 'react-router-dom'
 
-const Announcements = ({ setEventId }) => {
+const Announcements = ({ setEventId,setFeesEvent }) => {
   const containerRef = useRef(null)
   const currentDate = new Date();
   document.body.style.overflowY = "hidden";
@@ -84,7 +84,7 @@ const Announcements = ({ setEventId }) => {
               <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate  ? 
-                <Link onClick={()=> setEventId(currentEvent.id)} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
+                <Link onClick={()=> {setEventId(currentEvent.id); setFeesEvent(currentEvent.fees) }} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
                   <span className='group-hover:hover:border-[#1B9E64] p-1 transition-all rounded-xl group-hover:hover:border-2'>
                   Register Now
                   </span>
@@ -99,7 +99,7 @@ const Announcements = ({ setEventId }) => {
         {!isMobile && (
           <section className='flex items-end justify-end -mt-16 h-1/2 w-1/3 z-10'>
             <img
-              className='h-full w-full object-cover border-r-4 border-b-4 border-[#fff]'
+              className='h-full w-full object-cover border-r-4 p-3 border-b-4 border-[#fff]'
               src={currentEvent.poster}
               loading="lazy"
             />

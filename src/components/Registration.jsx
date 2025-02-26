@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
-const Registration = ({ eventId }) => {
+const Registration = ({ eventId,  }) => {
   const client = axios.create({
     baseURL: "https://phoenixkkw.pythonanywhere.com/",
     headers:{
@@ -12,7 +12,6 @@ const Registration = ({ eventId }) => {
 
 
   const navigate = useNavigate(); // Used for redirection
-  const [feesEvent, setFeesEvent] = useState(0)
   const location = useLocation();
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
@@ -22,16 +21,6 @@ const Registration = ({ eventId }) => {
       setEventData({
         ...location.state.data
       });
-      const stateFees = location.state.data.fees || 0;
-      setFeesEvent(stateFees);
-      localStorage.setItem('eventFees', stateFees);
-      console.log("Event data from state:", location.state.data);
-    } else {
-      // If no location state, try to get from localStorage
-      const savedFees = localStorage.getItem('eventFees');
-      if (savedFees) {
-        setFeesEvent(parseInt(savedFees));
-      }
     }
     
     // Always fetch fresh data from API regardless of location state
@@ -47,13 +36,7 @@ const Registration = ({ eventId }) => {
             event_type: event.event_type, 
             value: event.id
           });
-          
-          // Set fees and store in localStorage
-          if (event.fees !== undefined) {
-            setFeesEvent(event.fees);
-            localStorage.setItem('eventFees', event.fees);
-            console.log("Fees set from API:", event.fees);
-          }
+          // In your useEffect when setting feesEvent
         } else {
           console.error("Event not found with ID:", eventId);
         }
@@ -61,12 +44,7 @@ const Registration = ({ eventId }) => {
       .catch(error => {
         console.error("Failed to fetch event data:", error);
       });
-  }, [eventId]);
-  
-  // Fix the addTeamMember function
-  // const addTeamMember = () => {
-
-  // }; // Remove location.state from dependencies to prevent double fetching
+  }, [eventId]); // Remove location.state from dependencies to prevent double fetching
   const [formData, setFormData] = useState({
     registrant: '',
     registrant_email: '',
@@ -99,9 +77,7 @@ const Registration = ({ eventId }) => {
     setFormData({
       ...formData,
       team_members: [...formData.team_members, { name: '', email: '', phone: '' }]
-    });
-    
-    <div>
+    });<div>
     <label className="block text-sm font-medium mb-1">Team Name</label>
     <input
       type="text"
