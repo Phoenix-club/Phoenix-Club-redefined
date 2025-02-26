@@ -17,7 +17,7 @@ const Registration = ({ eventId }) => {
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(()=>{
     if(location.state?.data){
-      setEventData(location.state.data)
+      setEventData({ ...location.state.data});
     } 
   },[location.state])
   const [formData, setFormData] = useState({
@@ -186,7 +186,7 @@ const Registration = ({ eventId }) => {
           </div>
   
           {/* Payment Screenshot Upload */}
-          { Boolean(eventData.paid) && <div className="mt-4">
+          {( eventData.paid === true || eventData.paid ==="true") && <div className="mt-4">
             <label className="block text-sm font-medium mb-1">Payment Screenshot</label>
             <input
               type="file"
