@@ -125,6 +125,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       }, 4000);
       
     } catch (error) {
+      setIsProcessing(false);
       console.error('Registration failed:', error);
     }
   };
