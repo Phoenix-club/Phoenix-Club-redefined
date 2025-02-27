@@ -58,29 +58,29 @@ const Home = () => {
   const preloadImages = (imageArray) => {
     let loadedCount = 0;
     return new Promise((resolve)=>{
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        loadedCount += 1;
-        if(loadedCount === imageArray.length ){
-          resolve();
-        }
-      };
-      image.onerror = () =>{
-        loadedCount += 1;
-        if(loadedCount === imageArray.length){
-          resolve();
-        }
-      }
-    })
-  }
+      imageArray.forEach((src)=>{
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            loadedCount += 1;
+            if(loadedCount === imageArray.length ){
+              resolve();
+            }
+          };
+          image.onerror = () =>{
+            loadedCount += 1;
+            if(loadedCount === imageArray.length){
+              resolve();
+            }
+          };
+        });
+    });
+  };
   
   useEffect(()=>{
     setLoading(true);
     preloadImages(images).then(()=>{
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 1500);
+      setLoading(false);
     })
   },[location])
 
