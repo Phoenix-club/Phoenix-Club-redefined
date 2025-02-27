@@ -154,14 +154,15 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
     return (
       <div className="h-screen font-pixelSans w-screen flex flex-col items-center justify-center bg-[#F3BD9F] text-[#0F1F25]">
         <h1 className="text-4xl font-bold">Loading</h1>
-        <p className="text-lg mt-2">wait while data is processing... {uploadProgress}%</p>
+        <p className="text-xl mt-2">Uploading... {uploadProgress}%</p>
+        <p className="text-lg mt-2">Wait while data is getting uploded !</p>
       </div>
     );
   }
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
-      <div className="registration bg-[url('/bakchodi/image.png')] w-screen font-pixelSans justify-center items-center h-screen bg-bottom bg-cover bg-no-repeat max-lg:overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
+      <div className="registration w-screen font-pixelSans justify-center items-center h-screen max-lg:overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
         <div className='registration w-fit h-full max-lg:h-[150vh] backdrop-blur-sm p-5 max-lg:overflow-y-scroll items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
