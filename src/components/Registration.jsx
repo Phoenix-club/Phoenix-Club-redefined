@@ -144,7 +144,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
         <h1 className="text-4xl font-bold">Registration Successful!</h1>
         <p className="text-lg mt-2">You will soon receive your confirmation mail</p>
         <p className="text-lg mt-2">You will be redirected to home in a few seconds...</p>
-        <NavLink to="/" className="mt-4 px-6 py-2 bg-[#F6CAB6] text-[#000] rounded-lg">
+        <NavLink to="/" className="mt-4 px-6 py-2 bg-[#1F1F2F] text-[#fff] rounded-lg">
           Go to Home Now
         </NavLink>
       </div>
@@ -152,7 +152,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
   }
   if (isProcessing) {
     return (
-      <div className="h-screen font-pixelSans w-screen flex flex-col items-center justify-center bg-[#F3BD9F] text-[#0F1F25]">
+      <div className="h-screen font-pixelSans w-screen flex flex-col items-center justify-center bg-[#1F1F2F] text-[#fff]">
         <h1 className="text-4xl font-bold">Loading</h1>
         <p className="text-xl mt-2">Uploading... {uploadProgress}%</p>
         <p className="text-lg mt-2">Wait while data is getting uploded !</p>
@@ -162,7 +162,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
-      <div className="registration w-screen font-pixelSans justify-center items-center h-screen max-lg:overflow-y-scroll  p-6 bg-[#FFCCBC] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
+      <div className="registration w-screen font-pixelSans justify-center items-center h-screen max-lg:overflow-y-scroll  p-6 bg-[#1F1F2F] rounded-lg gap-10 max-lg:flex-col flex text-[#fff]">
 
         <div className='registration w-fit h-full max-lg:h-[150vh] backdrop-blur-sm p-5 max-lg:overflow-y-scroll items-center'>
         <h2 className="max-lg:text-2xl text-4xl font-bold mb-6">Event Registration : {eventData.name}</h2>
