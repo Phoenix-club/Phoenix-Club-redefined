@@ -5,6 +5,7 @@ import Experience from './Experience.jsx';
 import { ScrollControls } from '@react-three/drei';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { KernelSize } from 'postprocessing';
+import Loader from './Loader.jsx';
 
 const Members = () => {
   const [isLowEndDevice, setIsLowEndDevice] = useState(false);
@@ -18,7 +19,7 @@ const Members = () => {
 
   return (
     <motion.div className="w-screen h-screen">
-      <Suspense fallback={<div className="w-full h-full bg-black" />}>
+      <Suspense fallback={<Loader />}>
         <Canvas
           camera={{
             fov: 60,
