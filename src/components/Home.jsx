@@ -62,7 +62,7 @@ const Home = () => {
               resolve();
             }
           };
-          image.onerror = () =>{
+          img.onerror = () =>{
             loadedCount += 1;
             if(loadedCount === imageArray.length){
               resolve();
