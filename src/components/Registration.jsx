@@ -18,6 +18,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0)
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(() => {
@@ -114,7 +115,12 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
           'X-CSRFToken': csrfToken,
           'Content-Type': 'multipart/form-data',
         },
-        withCredentials: true
+        withCredentials: true,
+        onUploadProgress:(progressEvent) =>{ 
+          const { loaded, total } = progressEvent; 
+          const percentCompleted = Math.round((loaded * 100)/ total );;
+          setUploadProgress(percentCompleted);
+        }
       });
       console.log('Registration successful:', response.data);
       setIsProcessing(false)
@@ -148,7 +154,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
     return (
       <div className="h-screen font-pixelSans w-screen flex flex-col items-center justify-center bg-[#F3BD9F] text-[#0F1F25]">
         <h1 className="text-4xl font-bold">Loading</h1>
-        <p className="text-lg mt-2">wait while data is processing...</p>
+        <p className="text-lg mt-2">wait while data is processing... {uploadProgress}%</p>
       </div>
     );
   }
