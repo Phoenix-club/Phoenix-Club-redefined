@@ -43,16 +43,11 @@ const Home = () => {
     "/6.png",
     "/back.png",
     "/buildings.png",
-    "/car.gif",
     "/front.png",
     "/logo.png",
-    "/minero.gif",
     "/play.png",
-    "/spaceship.gif",
     "/ss150.jpeg",
     "/ss50.jpeg",
-    "/star.gif",
-    "/ticking.gif",
   ];
 
   const preloadImages = (imageArray) => {
