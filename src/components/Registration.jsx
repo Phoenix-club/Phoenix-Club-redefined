@@ -17,6 +17,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
 
   const navigate = useNavigate(); // Used for redirection
   const location = useLocation();
+  const [isProcessing, setIsProcessing] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Track success
   const [eventData, setEventData] = useState({ name: "", event_type: "", value: eventId });
   useEffect(() => {
@@ -84,16 +85,6 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       ...formData,
       team_members: [...formData.team_members, { name: '', email: '', phone: '' }]
     });
-    <div>
-    <label className="block text-sm font-medium mb-1">Team Name</label>
-    <input
-      type="text"
-      name="team_name"
-      value={formData.team_name}
-      onChange={handleInputChange}
-      className="w-full p-2 bg-backG/50 border rounded "
-      />
-  </div>
   };
 
   const removeTeamMember = (index) => {
@@ -117,6 +108,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
     });
 
     try {
+      setIsProcessing(true)
       const response = await client.post('register/', formPayload, {
         headers: {
           'X-CSRFToken': csrfToken,
@@ -125,7 +117,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
         withCredentials: true
       });
       console.log('Registration successful:', response.data);
-      
+      setIsProcessing(false)
       setRegistrationSuccess(true);
 
       setTimeout(() => {
@@ -151,7 +143,14 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       </div>
     );
   }
-
+  if (isProcessing) {
+    return (
+      <div className="h-screen font-pixelSans w-screen flex flex-col items-center justify-center bg-[#F3BD9F] text-[#0F1F25]">
+        <h1 className="text-4xl font-bold">Loading</h1>
+        <p className="text-lg mt-2">wait while data is processing...</p>
+      </div>
+    );
+  }
   // ✅ Otherwise, show the normal registration form
   if(eventData.name != null){
     return (
