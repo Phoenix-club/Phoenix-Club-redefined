@@ -22,12 +22,66 @@ const Home = () => {
     return JSON.parse(localStorage.getItem("feesEvent")) || 0;
   });
   const location = useLocation()
+  const images = [
+    "/cave/1.png",
+    "/cave/2.png",
+    "/cave/3.png",
+    "/cave/4.png",
+    "/cave/5.png",
+    "/cave/6.png",
+    "/cave/7.png",
+    "/space/AIM2.png",
+    "/space/CORNER.png",
+    "/space/DECOR.png",
+    "/space/DECOR1.png",
+    "/space/INFO.png",
+    "/space/INFO2.png",
+    "/space/INFO3.png",
+    "/space/MINFO.png",
+    "/space/SINFO.png",
+    "1.png",
+    "6.png",
+    "back.png",
+    "buildings.png",
+    "car.gif",
+    "front.png",
+    "logo.png",
+    "minero.gif",
+    "play.png",
+    "spaceship.gif",
+    "ss150.jpeg",
+    "ss50.jpeg",
+    "star.gif",
+    "ticking.gif",
+  ];
 
+  const preloadImages = (imageArray) => {
+    let loadedCount = 0;
+    return new Promise((resolve)=>{
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedCount += 1;
+        if(loadedCount === imageArray.length ){
+          resolve();
+        }
+      };
+      image.onerror = () =>{
+        loadedCount += 1;
+        if(loadedCount === imageArray.length){
+          resolve();
+        }
+      }
+    })
+  }
+  
   useEffect(()=>{
-    setLoading(true)
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 2000);
+    setLoading(true);
+    preloadImages(images).then(()=>
+      const timer = setTimeout(() => {
+        setLoading(false);)
+      }, 1500);
+    )
   },[location])
 
   useEffect(() => {
