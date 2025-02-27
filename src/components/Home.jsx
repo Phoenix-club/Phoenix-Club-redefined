@@ -77,11 +77,11 @@ const Home = () => {
   
   useEffect(()=>{
     setLoading(true);
-    preloadImages(images).then(()=>
+    preloadImages(images).then(()=>{
       const timer = setTimeout(() => {
-        setLoading(false);)
+        setLoading(false);
       }, 1500);
-    )
+    })
   },[location])
 
   useEffect(() => {
