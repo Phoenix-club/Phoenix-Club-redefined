@@ -83,7 +83,8 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
     setFormData({
       ...formData,
       team_members: [...formData.team_members, { name: '', email: '', phone: '' }]
-    });<div>
+    });
+    <div>
     <label className="block text-sm font-medium mb-1">Team Name</label>
     <input
       type="text"
@@ -125,10 +126,8 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       });
       console.log('Registration successful:', response.data);
       
-      // ✅ Show confirmation screen
       setRegistrationSuccess(true);
 
-      // ✅ Redirect to home after 3 seconds
       setTimeout(() => {
         navigate("/");
       }, 4000);
@@ -167,6 +166,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
               <label className="block text-sm font-medium mb-1">Registrant Name</label>
               <input
                 type="text"
+                id="registrant"
                 name="registrant"
                 value={formData.registrant}
                 onChange={handleInputChange}
@@ -178,6 +178,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
               <label className="block text-sm font-medium mb-1">Registrant Email</label>
               <input
                 type="email"
+                id="registrant_email"
                 name="registrant_email"
                 value={formData.registrant_email}
                 onChange={handleInputChange}
@@ -189,6 +190,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
               <label className="block text-sm font-medium mb-1">Registrant Phone</label>
               <input
                 type="tel"
+                id="registrant_phone"
                 name="registrant_phone"
                 value={formData.registrant_phone}
                 onChange={handleInputChange}
@@ -202,6 +204,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
               <input
                 type="text"
                 name="branch"
+                id="branch"
                 value={formData.branch}
                 onChange={handleInputChange}
                 className="w-full p-2 bg-backG/50 border rounded "
@@ -212,6 +215,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
               <input
                 type="text"
                 name="year"
+                id="year"
                 value={formData.year}
                 onChange={handleInputChange}
                 className="w-full p-2 bg-backG/50 border rounded "
@@ -222,6 +226,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
               <input
                 type="text"
                 name="team_name"
+                id="team_name"
                 value={formData.team_name}
                 onChange={handleInputChange}
                 className="w-full p-2 bg-backG/50 border rounded "
@@ -248,6 +253,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <input
                     type="text"
+                    id={index}
                     placeholder="Name"
                     value={member.name}
                     onChange={(e) => handleTeamMemberChange(index, 'name', e.target.value)}
@@ -256,6 +262,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
                     />
                   <input
                     type="email"
+                    id={index*2}
                     placeholder="Email"
                     value={member.email}
                     onChange={(e) => handleTeamMemberChange(index, 'email', e.target.value)}
@@ -265,6 +272,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
                   <input
                     type="tel"
                     placeholder="Phone"
+                    id={index*3}
                     value={member.phone}
                     onChange={(e) => handleTeamMemberChange(index, 'phone', e.target.value)}
                     className="p-2 border bg-backG/50 rounded "
