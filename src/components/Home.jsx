@@ -125,7 +125,7 @@ const Home = () => {
 
         <Routes location={location}>
           <Route index path='/' element={<HeroSection />} />
-          <Route path='/announcements' element={<Announcements setEvent_type={setEvent_type} setFeesEvent={setFeesEvent} setEventId={setEventId} />} />
+          <Route path='/announcements' element={<Announcements setLoading={setLoading} setEvent_type={setEvent_type} setFeesEvent={setFeesEvent} setEventId={setEventId} />} />
           <Route path='/register' element={<Registration event_type={event_type} feesEvent={feesEvent} eventId={eventId} />} />
           <Route path='/members' element={<Members />}/>
           <Route path='/loader' element={<Loader />}/>
