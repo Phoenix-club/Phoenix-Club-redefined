@@ -246,6 +246,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
             <label className="block text-sm font-medium mb-1">Payment Screenshot <p>(warning: image should be under 2MB and transaction ID should be visible)</p></label>
             <input
               type="file"
+              required
               onChange={handleFileChange}
               className="w-full p-2 border rounded "
               accept="image/*"
