@@ -155,7 +155,7 @@ const Registration = ({ eventId, feesEvent, event_type }) => {
       <div className="h-screen font-pixelSans w-screen flex flex-col items-center justify-center bg-[#1F1F2F] text-[#fff]">
         <h1 className="text-4xl font-bold">Loading</h1>
         <p className="text-xl mt-2">Uploading... {uploadProgress}%</p>
-        <p className="text-lg mt-2">Wait while data is getting uploded !</p>
+        <p className="text-lg mt-2">Wait while <span className="font-bold text-[1rem] "> Registration Screen </span> pops up </p>
       </div>
     );
   }
