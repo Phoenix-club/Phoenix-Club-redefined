@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Link, NavLink } from 'react-router-dom'
 
-const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
+const Announcements = ({ setLoading, setEventId,setFeesEvent, setEvent_type }) => {
   const containerRef = useRef(null)
   const currentDate = new Date();
   isMobile && (document.body.style.overflowY = "hidden");
@@ -34,7 +34,9 @@ const Announcements = ({ setEventId,setFeesEvent, setEvent_type }) => {
   }
 
   useEffect(() => {
-    fetchData()
+    setLoading(true);
+    fetchData();
+    setLoading(false)
   }, [])
 
   const backendDate = currentEvent?.date ? new Date(currentEvent.date) : null;
