@@ -19,7 +19,7 @@ const Members = () => {
 
   return (
     <motion.div className="w-screen h-screen">
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader image={"/spaceship.gif"}/>}>
         <Canvas
           camera={{
             fov: 60,
