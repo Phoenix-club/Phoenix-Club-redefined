@@ -91,16 +91,16 @@ const Announcements = ({ setLoading, setEventId,setFeesEvent, setEvent_type }) =
       <section className='w-full h-full flex flex-col justify-between items-center p-5 max-lg:p-5'>
         <section className='w-full h-fit flex flex-col overflow-visible pt-5 z-10'>
           <div className='w-full h-fit gap-5 max-lg:gap-2 font-pixelSans flex flex-col justify-center items-start text-5xl text-[#fff]'>
-            <h1 className='text-5xl max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]'>{currentEvent.name}</h1>
+            <h1 className={` ${isIOS ? `text-2xl`:`text-5xl` } max-lg:text-3xl p-5 border-l-4 border-t-4 border-[#fff]`}>{currentEvent.name}</h1>
             <span className='h-fit w-fit flex justify-normal flex-col max-lg:text-md'>
-              <p className='registration text-2xl overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2'>{currentEvent.description}</p>
+              <p className={`registration ${isIOS ? `text-xl`:`text-2xl` } overflow-y-scroll z-50 font-light max-md:text-sm max-md:w-full w-1/2`}>{currentEvent.description}</p>
               <p className='text-lg  max-md:text-sm pl-5'>Fees: ₹<span className='font-sans text-base'>{currentEvent.fees}</span></p>
               <p className='text-lg max-md:text-sm pl-5'>Date: <span className='font-sans text-base'>{formatDateToIST(currentEvent.date)}</span></p>
               <p className='text-lg  max-md:text-sm pl-5'> Deadline: <span className='font-sans text-base'>{formatDateToIST(currentEvent.deadline)}</span></p>
               <p className='text-lg max-md:text-sm pl-5'>For : {currentEvent.event_type}</p>
               <p className='text-lg pl-5'>Venue: {currentEvent.venue}</p>
               {backendDate > currentDate && currentEvent.name === "Prompt Quest"   ? 
-                <Link onClick={()=> {setEventId(currentEvent.id); setFeesEvent(currentEvent.fees); setEvent_type(currentEvent.event_type) }} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className='text-2xl w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]'>
+                <Link onClick={()=> {setEventId(currentEvent.id); setFeesEvent(currentEvent.fees); setEvent_type(currentEvent.event_type) }} to={"/register"} state={{ data:{ name:currentEvent.name, event_type: currentEvent.event_type,  value:currentEvent.id } }} className={`${isIOS ? `text-xl`:`text-2xl` } w-fit p-5 group hover:cursor-pointer  text-[#1B9E64]`}>
                   <span className='group-hover:hover:border-[#1B9E64] p-1 transition-all rounded-xl group-hover:hover:border-2'>
                   Register Now
                   </span>
@@ -124,7 +124,7 @@ const Announcements = ({ setLoading, setEventId,setFeesEvent, setEvent_type }) =
       </section>
 
       {/* Dashboard Titles */}
-      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 max-lg:p-5 absolute right-5 max-lg:right-0 top-64 max-lg:top-[60%] text-4xl max-lg:text-xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit max-lg:top-[65%] w-fit -translate-x-8 `} `}>
+      <section className={`w-[35rem] max-lg:w-72 z-50 h-fit p-10 max-lg:p-5 absolute right-5 max-lg:right-0 top-64 max-lg:top-[60%] ${isIOS ? `text-xl`:`text-2xl` } max-lg:text-xl font-pixelSans text-[#fff] ${isMobile && `border-4  bg-backG/10 backdrop-blur-sm h-fit max-lg:top-[65%] w-fit -translate-x-8 `} `}>
       {Array.isArray(events) && events.length > 0 ? (
   events.map((event, index) => (
           <h1
@@ -166,7 +166,7 @@ const Announcements = ({ setLoading, setEventId,setFeesEvent, setEvent_type }) =
       {/* Navigation */}
       <NavLink
         to='/'
-        className='text-[#F6CAB6] group absolute z-50 bottom-10 max-lg:bottom-24 left-10 text-5xl max-md:text-3xl font-pixelSans'
+        className={`text-[#F6CAB6] group absolute z-50 bottom-10 ${isIOS ? `text-2xl`:`text-5xl` } max-lg:bottom-24 left-10  max-md:text-3xl font-pixelSans`}
       >
         <span className='group-hover:border-[#F6CAB6] group-hover:bg-[#FDE37D]/30 group-hover:text-[#FDE37D] border-4 max-md:px-1 px-3 border-[#FDE37D] rounded-lg transition-all flex'>
           <img
@@ -181,5 +181,12 @@ const Announcements = ({ setLoading, setEventId,setFeesEvent, setEvent_type }) =
     </div>
   )
 }
+
+const isIOS = () => {
+  return (
+    /iPhone|iPad|iPod/.test(navigator.userAgent) || 
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
+};
 
 export default Announcements;
